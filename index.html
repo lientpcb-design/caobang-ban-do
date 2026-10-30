@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CAO BẰNG QUÊ EM TRÊN BẢN ĐỒ</title>
+<meta name="description" content="Lược đồ tương tác Lịch sử và Địa lí 4: Pác Bó 3 chìa khoá (Tên – Chú giải – Hướng), gợi ý 3 bậc, gọi tên lỗi, gom lỗi cả lớp. Chạy không cần mạng.">
+<!--
+  CAO BẰNG QUÊ EM TRÊN BẢN ĐỒ — chiếu TV, Lịch sử và Địa lí 4 (Kết nối tri thức), Bài 1–3 + bài Địa phương em: Pác Bó 3 chìa khoá (Tên – Chú giải – Hướng).
+  Lược đồ MINH HOẠ, không theo tỉ lệ: dạy kĩ năng đọc lược đồ (hướng, chú giải, kí hiệu, tiếp giáp)
+  và gắn các địa danh quê em. Dữ kiện địa phương lấy theo Tài liệu giáo dục địa phương lớp 4.
+  Không cần mạng, không gửi dữ liệu đi. Làm cùng trợ lý AI Claude (Triway giáo viên).
+-->
+<style>
+:root{
+  --nen1:#062a2a; --nen2:#13294b; --kinh:rgba(255,255,255,.07); --kinh2:rgba(255,255,255,.12); --vien:rgba(255,255,255,.16);
+  --chu:#f0fdf4; --mo:#b8d4cf; --chinh:#34d399; --nhan1:#fbbf24; --nhan2:#f472b6; --dung:#22c55e; --sai:#f87171;
+  --giay:#fdf6e3; --giay2:#f3e7c4; --dat:#c9e4a7; --nui:#8d6e4a; --song:#2b8fd6; --bien:#c0262d; --ranh:#6b5b95;
+  --A:#f43f5e; --B:#3b82f6; --C:#f59e0b; --D:#a855f7;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--chu);
+  background:radial-gradient(1000px 600px at 10% 0%,rgba(52,211,153,.2),transparent 60%),
+             radial-gradient(900px 600px at 95% 100%,rgba(251,191,36,.14),transparent 60%),
+             linear-gradient(160deg,var(--nen1),var(--nen2));background-attachment:fixed;overflow-x:hidden}
+button{font:inherit;color:inherit;cursor:pointer}
+.dau{display:flex;align-items:center;gap:14px;padding:12px 22px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px}
+.logo h1{margin:0;font-size:26px;font-weight:900;letter-spacing:.5px;
+  background:linear-gradient(90deg,#6ee7b7,#fde68a,#f9a8d4);-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo small{display:block;color:var(--mo);font-size:13px}
+nav{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap}
+nav button{background:var(--kinh);border:1px solid var(--vien);border-radius:14px;padding:9px 14px;font-weight:600;transition:.15s}
+nav button:hover{transform:translateY(-2px);background:var(--kinh2)}
+nav button.on{background:linear-gradient(135deg,#059669,#2563eb);border-color:transparent;box-shadow:0 6px 18px rgba(5,150,105,.35)}
+main{padding:4px 22px 64px}
+.man{display:none;animation:hien .3s ease} .man.on{display:block}
+body.chup .man,body.chup .ghim{animation:none!important}
+@keyframes hien{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.kinh{background:var(--kinh);border:1px solid var(--vien);border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.nut{border:0;border-radius:14px;padding:11px 16px;min-height:44px;font-weight:700;background:linear-gradient(135deg,#10b981,#2563eb);box-shadow:0 6px 18px rgba(16,185,129,.3);transition:.15s}
+.nut:hover{transform:translateY(-2px)} .nut:active{transform:translateY(1px)}
+.nut.phu{background:transparent;border:1px solid var(--vien);box-shadow:none}
+.nut.vang{background:linear-gradient(135deg,#f59e0b,#f43f5e)}
+.ban-nhap{position:fixed;left:0;right:0;bottom:0;padding:7px 16px;font-size:13px;color:#d1fae5;background:rgba(6,40,30,.9);border-top:1px solid rgba(34,197,94,.4);text-align:center;z-index:5}
+.luoi{display:grid;grid-template-columns:1.45fr .55fr;gap:18px}
+.khung-bd{position:relative;padding:12px;border-radius:22px;background:linear-gradient(160deg,var(--giay),var(--giay2));box-shadow:0 14px 34px rgba(0,0,0,.35)}
+.khung-bd svg.bd{width:100%;height:auto;max-height:calc(100vh - 210px);display:block;border-radius:14px;touch-action:none}
+#m-thu-thach .luoi{grid-template-columns:1.15fr .85fr}
+.dieu-bd{position:absolute;right:22px;bottom:22px;display:flex;flex-direction:column;gap:8px}
+.dieu-bd button{width:44px;height:44px;border-radius:12px;border:1px solid rgba(0,0,0,.15);background:#fff;color:#1f2937;font-size:22px;font-weight:900;box-shadow:0 3px 8px rgba(0,0,0,.2)}
+.ten-bd{position:absolute;left:24px;top:20px;color:#1f2937;background:rgba(255,255,255,.88);padding:6px 12px;border-radius:12px;font-weight:800;font-size:17px;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.ten-bd small{display:block;font-weight:600;font-size:12px;color:#92400e}
+.ghim{cursor:pointer;animation:nay 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes nay{50%{transform:translateY(-5px)}}
+.ghim.chon .vong{stroke:#111;stroke-width:4}
+.ghim.sai-cham{animation:rung .4s}
+@keyframes rung{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.ben{display:flex;flex-direction:column;gap:14px}
+.lop-phu{padding:14px}
+.lop-phu h3,.the-tt h3,.chu-giai h3{margin:0 0 10px;font-size:17px}
+.cong{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.05);margin-bottom:6px;cursor:pointer;user-select:none;border:1px solid transparent}
+.cong.tat{opacity:.45}
+.cong .ky{width:34px;height:24px;flex:none}
+.cong .cong-tat{margin-left:auto;width:42px;height:24px;border-radius:999px;background:#10b981;position:relative;transition:.2s}
+.cong .cong-tat::after{content:"";position:absolute;top:3px;left:21px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.2s}
+.cong.tat .cong-tat{background:#475569} .cong.tat .cong-tat::after{left:3px}
+.the-tt{padding:14px}
+.the-tt .hinh-tt{height:150px;border-radius:14px;overflow:hidden;background:rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center}
+.the-tt .hinh-tt svg{height:100%;width:100%}
+.the-tt p{margin:8px 0 0;font-size:16px;line-height:1.5}
+.kiem{display:inline-block;margin-top:8px;font-size:13px;padding:4px 10px;border-radius:999px;background:rgba(251,191,36,.18);border:1px solid rgba(251,191,36,.5);color:#fde68a}
+/* ĐỌC BẢN ĐỒ 3 BƯỚC */
+.buoc3{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.buoc3 button{flex:1;min-width:160px;border:1px solid var(--vien);background:var(--kinh);border-radius:16px;padding:12px;text-align:left;font-weight:700}
+.buoc3 button.on{background:linear-gradient(135deg,#059669,#2563eb);border-color:transparent}
+.buoc3 button b{display:inline-flex;width:30px;height:30px;border-radius:50%;background:#fff;color:#065f46;align-items:center;justify-content:center;margin-right:8px}
+.loi-buoc{padding:14px;font-size:17px;line-height:1.55}
+.loi-buoc .to{font-size:22px;font-weight:800;margin-bottom:6px}
+.sang{animation:sang 1.2s ease-in-out infinite}
+@keyframes sang{50%{opacity:.35}}
+body.chup .sang{animation:none}
+/* THỬ THÁCH */
+.cau-hoi{font-size:26px;font-weight:800;margin:4px 0 12px}
+.lua{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.the{border-radius:16px;padding:12px;border:2px solid transparent;text-align:left;display:flex;align-items:center;gap:12px;font-size:19px;font-weight:700;
+  background:linear-gradient(160deg,color-mix(in srgb,var(--m) 38%,transparent),color-mix(in srgb,var(--m) 12%,transparent));box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);transition:.2s}
+.the:hover{transform:translateY(-2px)}
+.the .cc{width:44px;height:44px;border-radius:12px;background:var(--m);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;flex:none}
+.the.chon{border-color:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.22)}
+.the.dung{border-color:var(--dung);box-shadow:0 0 0 4px rgba(34,197,94,.35),0 0 26px rgba(34,197,94,.5)}
+.the.mo-di{opacity:.4}
+.tien{display:flex;gap:6px}
+.tien i{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.2);display:block}
+.tien i.dg{background:var(--dung)} .tien i.sa{background:var(--sai)} .tien i.nay{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.25)}
+.giai{padding:14px;margin-top:12px;display:none;font-size:16px;line-height:1.5}
+.giai.on{display:block} .giai.ok{background:rgba(34,197,94,.13);border-color:rgba(34,197,94,.55)} .giai.chua{background:rgba(248,113,113,.11);border-color:rgba(248,113,113,.55)}
+.ten-loi{display:inline-block;padding:3px 10px;border-radius:999px;background:rgba(248,113,113,.28);font-weight:700;font-size:14px;margin-bottom:4px}
+.dieu{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.diem{display:flex;gap:12px;align-items:center;font-size:15px;color:var(--mo)}
+.diem b{font-size:30px;color:#fff}
+/* DÒNG THỜI GIAN */
+.truc{position:relative;padding:30px 20px 20px}
+.truc .duong{position:absolute;left:40px;right:40px;top:122px;height:8px;border-radius:999px;background:linear-gradient(90deg,#34d399,#fbbf24,#f472b6)}
+.o-truc{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;position:relative}
+.o{min-height:220px;border:3px dashed rgba(255,255,255,.3);border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:12px;gap:8px;background:rgba(0,0,0,.12)}
+.o .so{width:44px;height:44px;border-radius:50%;background:#fff;color:#065f46;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:20px}
+.o.dung{border-style:solid;border-color:var(--dung)} .o.sai{border-style:solid;border-color:var(--sai)}
+.kho-the{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+.su-kien{border:0;border-radius:18px;padding:12px;text-align:center;background:linear-gradient(150deg,var(--m1),var(--m2));box-shadow:0 8px 20px rgba(0,0,0,.3);font-weight:700;font-size:16px;transition:.15s;width:100%}
+.su-kien:hover{transform:translateY(-3px)}
+.su-kien svg{width:100%;height:96px}
+.su-kien .nam{font-size:24px;font-weight:900}
+.su-kien.da-dat{opacity:.3;pointer-events:none}
+.o .su-kien{pointer-events:auto}
+/* SOẠN */
+.soan{display:grid;grid-template-columns:1.3fr .7fr;gap:18px}
+.form{padding:16px;display:flex;flex-direction:column;gap:10px}
+.form label{display:flex;flex-direction:column;gap:5px;font-size:14px;color:var(--mo)}
+.form input,.form textarea,.form select{font:inherit;font-size:16px;padding:9px 11px;border-radius:12px;border:1px solid var(--vien);background:rgba(0,0,0,.25);color:var(--chu)}
+.form textarea{min-height:80px;resize:vertical}
+.toast{position:fixed;left:50%;top:18px;transform:translateX(-50%);background:#0f172a;border:1px solid var(--vien);padding:10px 18px;border-radius:14px;z-index:30;display:none}
+.toast.on{display:block}
+#phao{position:fixed;inset:0;pointer-events:none;z-index:25}
+/* AI KHI DÙNG: gợi ý 3 bậc · phiếu cả lớp · máy đếm thẻ màu · bản đồ lỗi cả lớp */
+.goi-y{display:none;margin-top:10px;padding:12px 14px;border-radius:16px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.5);font-size:16px;line-height:1.5}
+.goi-y.on{display:block}
+.goi-y .bac{display:flex;gap:8px;margin-bottom:8px}
+.goi-y .bac i{flex:1;height:8px;border-radius:99px;background:rgba(255,255,255,.18);display:block} .goi-y .bac i.d{background:#fbbf24}
+.goi-y .dong{margin:5px 0} .goi-y .dong b{color:#fde68a}
+.phieu-lop{margin-top:12px;padding:12px;border-radius:16px;background:rgba(0,0,0,.18);border:1px solid var(--vien)}
+.phieu-lop h4{margin:0 0 8px;font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pl-luoi{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.pl-o{border-radius:14px;padding:8px;text-align:center;background:linear-gradient(160deg,color-mix(in srgb,var(--m) 34%,transparent),color-mix(in srgb,var(--m) 10%,transparent))}
+.pl-o .cc{display:inline-flex;width:30px;height:30px;border-radius:9px;background:var(--m);align-items:center;justify-content:center;font-weight:900}
+.pl-o .so{font-size:26px;font-weight:900;line-height:1.1;margin:4px 0}
+.pl-o .tg{display:flex;gap:4px;justify-content:center}
+.pl-o .tg button{width:38px;height:38px;border-radius:10px;border:1px solid var(--vien);background:rgba(255,255,255,.1);font-size:20px;font-weight:900;padding:0}
+.pl-o .cot{height:6px;border-radius:99px;background:var(--m);margin-top:6px;transition:width .3s}
+.pl-chan{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;font-size:13px;color:var(--mo)}
+.pl-chan input{width:64px;font:inherit;font-size:15px;padding:5px 8px;border-radius:10px;border:1px solid var(--vien);background:rgba(0,0,0,.25);color:var(--chu)}
+.nut.nho{min-height:38px;padding:6px 12px;font-size:14px;border-radius:12px}
+.may{display:none;margin-top:10px;padding:12px;border-radius:16px;background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.45)}
+.may.on{display:block}
+.may-luoi{display:grid;grid-template-columns:200px 1fr;gap:12px;align-items:start}
+.may canvas{width:200px;height:150px;border-radius:12px;background:#0b1220;image-rendering:pixelated;border:2px solid rgba(255,255,255,.25);display:block}
+.may-day{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.may-day button{min-height:38px;border-radius:12px;border:2px solid transparent;padding:4px 12px;font-weight:800;background:color-mix(in srgb,var(--m) 42%,transparent)}
+.may-day button.xong{border-color:#fff}
+.may small{display:block;color:var(--mo);line-height:1.45;font-size:13px}
+.may .tt{font-weight:700;margin:4px 0;font-size:15px}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.kpi>div{padding:14px;text-align:center} .kpi b{display:block;font-size:34px;line-height:1.15} .kpi span{color:var(--mo);font-size:14px}
+.hang-loi{display:grid;grid-template-columns:230px 1fr 60px 130px;gap:12px;align-items:center;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.05);margin-bottom:8px;border:2px solid transparent}
+.hang-loi.nhat{border-color:#fbbf24;background:rgba(251,191,36,.1)}
+.hang-loi .ten b{display:block;font-size:16px} .hang-loi .ten small{color:var(--mo)}
+.hang-loi .cot-n{height:22px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
+.hang-loi .cot-n i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#fb7185,#f59e0b);transition:width .4s}
+.hang-loi .n{font-size:24px;font-weight:900;text-align:center}
+.dai-thu{background:#7f1d1d;color:#fecaca;text-align:center;font-weight:800;padding:6px;border-radius:12px;margin-bottom:10px}
+/* IN LƯỢC ĐỒ (Ctrl+P ở màn Pác Bó hoặc Khám phá): chỉ in lược đồ, để làm phiếu đo */
+@media print{
+  .dau,.ban-nhap,.ben,.dieu-bd,#phao,.toast{display:none!important}
+  body{background:#fff!important;color:#000} *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .luoi{display:block!important} .khung-bd{box-shadow:none!important;background:#fff!important} .khung-bd svg.bd{max-height:none!important}
+  .ghim{animation:none!important}
+}
+/* PÁC BÓ — 3 CHÌA KHOÁ */
+.nv{padding:14px 16px;font-size:16px;line-height:1.5}
+.nv b.to{display:block;font-size:20px;margin-bottom:2px}
+.chia{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:12px;border-radius:18px;background:var(--kinh);border:2px solid var(--vien);margin-bottom:10px}
+.chia .so-chia{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:30px;background:rgba(255,255,255,.1);filter:grayscale(1);opacity:.7}
+.chia.mo{border-color:var(--dung);background:rgba(34,197,94,.12)}
+.chia.mo .so-chia{filter:none;opacity:1;background:linear-gradient(135deg,#fbbf24,#f59e0b);box-shadow:0 0 22px rgba(251,191,36,.55)}
+.chia h4{margin:0 0 2px;font-size:18px} .chia small{display:block;color:var(--mo);font-size:14px;line-height:1.4}
+.chia .tt-chia{font-size:13px;font-weight:700;color:#fde68a;margin-top:3px}
+.hop{padding:16px;text-align:center;border-radius:20px;border:2px dashed rgba(251,191,36,.6);background:rgba(251,191,36,.08)}
+.hop.mo{border-style:solid;background:linear-gradient(160deg,rgba(251,191,36,.25),rgba(52,211,153,.18))}
+.hop .bieu{font-size:46px;line-height:1.1}
+.chia-mo{margin-top:8px;padding:8px 12px;border-radius:12px;background:rgba(251,191,36,.2);border:1px solid rgba(251,191,36,.6);font-weight:800}
+.ghim.nhap-nhay{animation:sang 1.2s ease-in-out infinite}
+@media (max-width:900px){
+  .chia{grid-template-columns:52px 1fr} .chia .nut{grid-column:1/-1} #m-thu-thach .luoi{grid-template-columns:1fr} .pl-luoi{grid-template-columns:repeat(2,1fr)} .ben,.kinh{min-width:0}
+  .luoi,.soan{grid-template-columns:1fr} .o-truc,.kho-the{grid-template-columns:1fr} .lua{grid-template-columns:1fr}
+  .truc .duong{display:none} nav{margin-left:0}
+  .kpi{grid-template-columns:repeat(2,1fr)} .hang-loi{grid-template-columns:1fr 1fr} .hang-loi .cot-n{grid-column:1/-1;order:3} .may-luoi{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="dau">
+  <div class="logo">
+    <svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true">
+      <rect x="2" y="2" width="60" height="60" rx="16" fill="#065f46"/>
+      <path d="M8 46 L22 24 L30 34 L40 16 L56 46 Z" fill="#34d399"/><path d="M36 22 L40 16 L44 22 Z" fill="#fff"/>
+      <path d="M6 50 Q20 42 32 50 T58 48" fill="none" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"/>
+      <path d="M44 6 a8 8 0 0 1 8 8 c0 6-8 14-8 14 s-8-8-8-14 a8 8 0 0 1 8-8z" fill="#f43f5e" stroke="#fff" stroke-width="2"/><circle cx="44" cy="14" r="3" fill="#fff"/>
+    </svg>
+    <div><h1>CAO BẰNG QUÊ EM TRÊN BẢN ĐỒ</h1><small>Lịch sử và Địa lí 4 · Đọc lược đồ · Pác Bó 3 chìa khoá</small></div>
+  </div>
+  <nav>
+    <button data-man="kham-pha">🗺️ Khám phá</button>
+    <button data-man="doc-ban-do">🧭 Đọc lược đồ 3 bước</button>
+    <button data-man="pac-bo">🔑 Pác Bó 3 chìa khoá</button>
+    <button data-man="thu-thach">🎯 Thử thách</button>
+    <button data-man="dong-thoi-gian">⏳ Dòng thời gian</button>
+    <button data-man="loi-lop">📊 Lỗi cả lớp</button>
+    <button data-man="soan">✏️ Cô sửa bản đồ</button>
+  </nav>
+</header>
+
+<main>
+<section class="man" id="m-kham-pha">
+  <div class="luoi">
+    <div class="khung-bd" id="khungBd1"></div>
+    <div class="ben">
+      <div class="kinh lop-phu"><h3>🧩 Bật / tắt lớp bản đồ</h3><div id="dsLop"></div></div>
+      <div class="kinh the-tt" id="theTT"></div>
+    </div>
+  </div>
+</section>
+
+<section class="man" id="m-doc-ban-do">
+  <div class="buoc3" id="buoc3"></div>
+  <div class="luoi">
+    <div class="khung-bd" id="khungBd2"></div>
+    <div class="ben">
+      <div class="kinh loi-buoc" id="loiBuoc"></div>
+      <div class="kinh chu-giai" style="padding:14px"><h3>📒 Chú giải</h3><div id="chuGiai"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="man" id="m-pac-bo">
+  <div class="luoi">
+    <div class="khung-bd" id="khungBd5"></div>
+    <div class="ben">
+      <div class="kinh nv"><b class="to">🎒 Nhiệm vụ: Liên lạc viên nhí</b>Từ cột mốc biên giới, em phải tìm đường tới hang Cốc Bó. Cần <b>3 chìa khoá đọc lược đồ</b> — mở đủ 3 chìa là mở được Hộp bí mật!</div>
+      <div id="dsChia"></div>
+      <div class="kinh the-tt" id="theTTpb"></div>
+    </div>
+  </div>
+</section>
+
+<section class="man" id="m-thu-thach">
+  <div class="luoi">
+    <div class="khung-bd" id="khungBd3"></div>
+    <div class="ben">
+      <div class="kinh" style="padding:16px">
+        <div style="display:flex;align-items:center;gap:10px"><span class="kiem" style="margin:0" id="loaiCau"></span><div class="tien" id="tien" style="margin-left:auto"></div></div>
+        <div class="cau-hoi" id="cauHoi"></div>
+        <div class="lua" id="lua"></div>
+        <div class="phieu-lop" id="phieuLop"></div>
+        <div class="may" id="may"></div>
+        <div class="goi-y" id="goiY"></div>
+        <div class="kinh giai" id="giai"></div>
+        <div class="dieu">
+          <button class="nut phu" id="btTruoc">◀</button>
+          <button class="nut phu" id="btGoiY">💡 Gợi ý</button>
+          <button class="nut vang" id="btMo">✨ Mở đáp án</button>
+          <button class="nut" id="btTiep">Câu tiếp ▶</button>
+          <button class="nut phu" id="btVe8" style="display:none">↩ Về 8 câu</button>
+        </div>
+      </div>
+      <div class="kinh diem" style="padding:14px"><span style="font-size:30px">🏆</span><div>Cả lớp đúng <b id="soDung">0</b> / <span id="soCau"></span> câu</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="man" id="m-dong-thoi-gian">
+  <div class="kinh" style="padding:14px 18px;margin-bottom:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+    <span style="font-size:30px">⏳</span>
+    <div><b style="font-size:20px">Xếp sự kiện theo thứ tự thời gian</b><div style="color:var(--mo)">Chạm thẻ sự kiện theo thứ tự <b>xảy ra trước → sau</b>. Đặt sai thì chạm ô để gỡ.</div></div>
+    <button class="nut phu" id="btLamLai" style="margin-left:auto">↺ Làm lại</button>
+  </div>
+  <div class="kinh truc"><div class="duong"></div><div class="o-truc" id="oTruc"></div></div>
+  <div class="kho-the" id="khoThe"></div>
+</section>
+
+<section class="man" id="m-loi-lop">
+  <div id="daiThu"></div>
+  <div class="kpi" id="kpi"></div>
+  <div class="luoi" style="grid-template-columns:1.5fr .5fr">
+    <div class="kinh" style="padding:16px"><h3 style="margin:0 0 4px;font-size:20px">📊 Cả lớp hay nhầm lỗi nào?</h3><div style="color:var(--mo);font-size:14px;margin-bottom:12px">Máy cộng dồn <b>lượt chọn</b> của cả lớp theo từng loại lỗi (không ghi tên em nào). Bấm ▶ để luyện đúng lỗi đó.</div><div id="dsLoi"></div></div>
+    <div class="ben">
+      <div class="kinh" style="padding:16px" id="loiGoiY"></div>
+      <div class="kinh" style="padding:14px;font-size:14px;line-height:1.5;color:var(--mo)">
+        Nhật ký này là của <b>buổi dạy</b> — số liệu trước – sau trong hồ sơ vẫn lấy từ <b>phiếu giấy 5 câu</b>.
+        <div class="dieu"><button class="nut phu" id="btXuatNK">⬇️ Xuất CSV</button><button class="nut phu" id="btXoaNK">🗑️ Buổi mới</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="man" id="m-soan">
+  <div class="soan">
+    <div class="khung-bd" id="khungBd4"></div>
+    <div class="ben">
+      <div class="kinh form" id="formSoan"></div>
+      <div class="kinh" style="padding:14px;font-size:14px;line-height:1.5;color:var(--mo)">
+        • Kéo ghim để đổi chỗ · chạm ghim để sửa.<br>• Dữ kiện địa phương: <b>đối chiếu Tài liệu giáo dục địa phương lớp 4</b>, ghi nguồn.<br>
+        • Lưu trên trình duyệt máy này — nhớ bấm <b>Xuất</b> để sao lưu.
+        <div class="dieu"><button class="nut" id="btThem">➕ Thêm ghim</button><button class="nut phu" id="btXuat">⬇️ Xuất</button><button class="nut phu" id="btNhap">📂 Nhập</button><button class="nut phu" id="btGoc">↺ Về mặc định</button></div>
+        <input type="file" id="fileNhap" accept=".json" hidden>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<canvas id="phao"></canvas>
+<div class="toast" id="toast"></div>
+<div class="ban-nhap">Cao Bằng quê em trên bản đồ · Tác giả: Hoàng Thị Liên, Trường TH&amp;THCS Nùng Trí Cao, Cao Bằng · Làm cùng trợ lý AI Claude · Lược đồ minh hoạ, không theo tỉ lệ (vị trí gần đúng) — dạy chính thức dùng bản đồ, sơ đồ trong SGK</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const luu = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const doc = (k, md) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : md; } catch (e) { return md; } };
+function bao(t) { const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(bao._t); bao._t = setTimeout(() => el.classList.remove("on"), 2200); }
+let __am = null;
+function tieng(loai) { try { __am = __am || new (window.AudioContext || window.webkitAudioContext)(); const t = __am.currentTime, ds = loai === "dung" ? [880, 1320] : loai === "sai" ? [300, 220] : [660];
+  ds.forEach((f, i) => { const o = __am.createOscillator(), g = __am.createGain(); o.type = loai === "sai" ? "triangle" : "sine"; o.frequency.value = f;
+    g.gain.setValueAtTime(.0001, t + i * .12); g.gain.exponentialRampToValueAtTime(.22, t + i * .12 + .02); g.gain.exponentialRampToValueAtTime(.0001, t + i * .12 + .3);
+    o.connect(g).connect(__am.destination); o.start(t + i * .12); o.stop(t + i * .12 + .32); }); } catch (e) {} }
+function phaoGiay() { const cv = $("#phao"), x = cv.getContext("2d"); cv.width = innerWidth; cv.height = innerHeight; const mau = ["#34d399", "#fbbf24", "#f472b6", "#60a5fa", "#a78bfa"];
+  const ht = Array.from({ length: 130 }, () => ({ x: innerWidth / 2, y: innerHeight / 3, vx: (Math.random() - .5) * 16, vy: -Math.random() * 14 - 4, r: 4 + Math.random() * 5, m: mau[Math.random() * 5 | 0], q: Math.random() * 6 }));
+  let n = 0; (function ve() { x.clearRect(0, 0, cv.width, cv.height); ht.forEach(h => { h.x += h.vx; h.y += h.vy; h.vy += .45; h.q += .2; x.fillStyle = h.m; x.save(); x.translate(h.x, h.y); x.rotate(h.q); x.fillRect(-h.r, -h.r / 2, h.r * 2, h.r); x.restore(); });
+    if (++n < 90) requestAnimationFrame(ve); else x.clearRect(0, 0, cv.width, cv.height); })(); }
+
+/* ---------- loại ghim (kí hiệu = chú giải) ---------- */
+const LOAI = {
+  "truong": { ten: "Trường em", mau: "#2563eb", ky: "🏫" },
+  "di-tich": { ten: "Di tích lịch sử", mau: "#dc2626", ky: "▲" },
+  "danh-thang": { ten: "Danh lam thắng cảnh", mau: "#059669", ky: "★" },
+  "khac": { ten: "Địa điểm khác", mau: "#d97706", ky: "●" }
+};
+/* ---------- ghim mặc định — cô đối chiếu tài liệu địa phương ---------- */
+const GHIM_GOC = [
+  { id: "truong", loai: "truong", x: 520, y: 335, ten: "Phường Nùng Trí Cao", mo: "Nơi có trường em: Trường TH&THCS Nùng Trí Cao.", hinh: "truong" },
+  { id: "pac-bo", loai: "di-tich", x: 415, y: 150, ten: "Khu di tích Pác Bó", mo: "Năm 1941, Bác Hồ về nước, sống và làm việc tại Pác Bó. Gần biên giới phía Bắc.", hinh: "hang" },
+  { id: "tran-hung-dao", loai: "di-tich", x: 300, y: 385, ten: "Khu rừng Trần Hưng Đạo", mo: "Nơi thành lập Đội Việt Nam Tuyên truyền Giải phóng quân ngày 22/12/1944.", hinh: "rung" },
+  { id: "ban-gioc", loai: "danh-thang", x: 705, y: 140, ten: "Thác Bản Giốc", mo: "Thác nước trên sông Quây Sơn, ở biên giới Việt Nam – Trung Quốc.", hinh: "thac" }
+];
+let GHIM = doc("cb_ghim", null) || JSON.parse(JSON.stringify(GHIM_GOC));
+const SU_KIEN = [
+  { nam: "1941", t: "Bác Hồ về nước, sống và làm việc ở Pác Bó", hinh: "hang", m1: "#dc2626", m2: "#9333ea" },
+  { nam: "1944", t: "Thành lập Đội Việt Nam Tuyên truyền Giải phóng quân", hinh: "rung", m1: "#059669", m2: "#0d9488" },
+  { nam: "2018", t: "Non nước Cao Bằng được UNESCO công nhận Công viên địa chất toàn cầu", hinh: "nui", m1: "#2563eb", m2: "#7c3aed" }
+];
+
+/* ---------- hình minh hoạ SVG (tự vẽ) ---------- */
+const HINH = {
+  thac: `<svg viewBox="0 0 300 150"><rect width="300" height="150" fill="#bae6fd"/><path d="M0 70 L60 30 L110 60 L170 20 L240 55 L300 30 L300 150 L0 150Z" fill="#4d7c0f"/>
+    <path d="M90 60 h120 v20 h-120z" fill="#166534"/><g fill="#e0f2fe"><rect x="100" y="62" width="14" height="70" rx="6"/><rect x="124" y="58" width="18" height="80" rx="8"/><rect x="152" y="62" width="14" height="72" rx="6"/><rect x="176" y="60" width="18" height="76" rx="8"/></g>
+    <rect y="128" width="300" height="22" fill="#38bdf8"/><g fill="#fff" opacity=".8"><circle cx="110" cy="132" r="6"/><circle cx="140" cy="135" r="8"/><circle cx="170" cy="132" r="6"/><circle cx="190" cy="136" r="7"/></g></svg>`,
+  hang: `<svg viewBox="0 0 300 150"><rect width="300" height="150" fill="#d9f99d"/><path d="M0 120 L40 40 L90 90 L140 20 L200 80 L250 35 L300 100 L300 150 L0 150Z" fill="#65a30d"/>
+    <path d="M120 150 Q120 95 150 92 Q180 95 180 150Z" fill="#1c1917"/><path d="M60 150 Q120 128 150 140 T260 136 L260 150Z" fill="#38bdf8"/>
+    <g transform="translate(220 50)"><rect x="0" y="0" width="3" height="40" fill="#78350f"/><rect x="3" y="0" width="30" height="20" fill="#dc2626"/><path d="M18 4 l2.4 5 5.4.6-4 3.6 1.2 5.3-5-2.8-5 2.8 1.2-5.3-4-3.6 5.4-.6z" fill="#facc15"/></g></svg>`,
+  rung: `<svg viewBox="0 0 300 150"><rect width="300" height="150" fill="#dcfce7"/><g fill="#15803d">${[20,60,100,150,200,240,280].map((x,i)=>`<path d="M${x} ${40+i%2*12} L${x-26} 130 L${x+26} 130Z"/>`).join("")}</g>
+    <rect y="128" width="300" height="22" fill="#854d0e"/><g transform="translate(140 40)"><rect x="0" y="0" width="3" height="60" fill="#78350f"/><rect x="3" y="0" width="36" height="24" fill="#dc2626"/><path d="M21 5 l2.6 5.5 6 .6-4.4 4 1.3 5.8-5.5-3-5.5 3 1.3-5.8-4.4-4 6-.6z" fill="#facc15"/></g></svg>`,
+  truong: `<svg viewBox="0 0 300 150"><rect width="300" height="150" fill="#e0f2fe"/><rect y="120" width="300" height="30" fill="#86efac"/>
+    <rect x="70" y="55" width="160" height="70" fill="#fde68a"/><path d="M60 58 L150 20 L240 58Z" fill="#dc2626"/>${[90,125,160,195].map(x=>`<rect x="${x}" y="70" width="18" height="18" fill="#60a5fa"/>`).join("")}
+    <rect x="138" y="95" width="24" height="30" fill="#92400e"/><rect x="146" y="2" width="2" height="22" fill="#475569"/><rect x="148" y="2" width="20" height="12" fill="#dc2626"/></svg>`,
+  nui: `<svg viewBox="0 0 300 150"><rect width="300" height="150" fill="#cffafe"/><path d="M0 130 L50 50 L80 90 L130 30 L170 85 L210 45 L260 95 L300 60 L300 150 L0 150Z" fill="#0f766e"/>
+    <path d="M118 48 L130 30 L142 48Z M200 60 L210 45 L220 60Z" fill="#fff"/><path d="M0 140 Q80 120 150 138 T300 132 L300 150 L0 150Z" fill="#38bdf8"/>
+    <circle cx="250" cy="30" r="16" fill="#fbbf24"/></svg>`,
+  khac: `<svg viewBox="0 0 300 150"><rect width="300" height="150" fill="#fef3c7"/><path d="M150 20 a28 28 0 0 1 28 28 c0 22-28 52-28 52 s-28-30-28-52 a28 28 0 0 1 28-28z" fill="#d97706"/><circle cx="150" cy="48" r="10" fill="#fff"/><rect y="120" width="300" height="30" fill="#a3e635"/></svg>`
+};
+
+/* ---------- LƯỢC ĐỒ (minh hoạ, không theo tỉ lệ) ---------- */
+const BIEN_GIOI = "M250,150 C300,120 340,140 380,110 C430,80 470,95 520,85 C570,75 610,100 650,95 C700,90 740,120 770,150 C800,180 790,230 760,260 C740,290 770,330 750,370";
+const RANH_GIOI = "M750,370 C730,410 680,420 640,440 C600,470 560,450 520,470 C470,495 430,480 390,500 C340,520 300,490 260,480 C210,465 190,420 160,400 C120,370 100,310 120,250 C140,190 200,170 250,150";
+const TINH = BIEN_GIOI + " " + RANH_GIOI.replace("M750,370", "") + " Z";
+const LOP_BD = [
+  { k: "dia-hinh", t: "Địa hình (núi, đồi)", ky: `<svg class="ky" viewBox="0 0 34 24"><path d="M2 22 L12 6 L18 14 L24 4 L32 22Z" fill="#8d6e4a"/></svg>` },
+  { k: "song", t: "Sông", ky: `<svg class="ky" viewBox="0 0 34 24"><path d="M2 16 Q10 6 17 14 T32 10" fill="none" stroke="#2b8fd6" stroke-width="4" stroke-linecap="round"/></svg>` },
+  { k: "bien-gioi", t: "Biên giới quốc gia", ky: `<svg class="ky" viewBox="0 0 34 24"><path d="M2 12 H32" stroke="#c0262d" stroke-width="4" stroke-dasharray="8 3 2 3"/></svg>` },
+  { k: "ranh-gioi", t: "Ranh giới tỉnh", ky: `<svg class="ky" viewBox="0 0 34 24"><path d="M2 12 H32" stroke="#6b5b95" stroke-width="3" stroke-dasharray="5 4"/></svg>` },
+  { k: "lang-gieng", t: "Tên nước, tỉnh láng giềng", ky: `<svg class="ky" viewBox="0 0 34 24"><text x="17" y="17" text-anchor="middle" font-size="13" font-weight="800" fill="#475569">Aa</text></svg>` },
+  { k: "ghim", t: "Địa danh (ghim)", ky: `<svg class="ky" viewBox="0 0 34 24"><path d="M17 2 a7 7 0 0 1 7 7 c0 6-7 13-7 13 s-7-7-7-13 a7 7 0 0 1 7-7z" fill="#dc2626"/></svg>` }
+];
+const S = { lop: Object.fromEntries(LOP_BD.map(l => [l.k, true])), chonGhim: "pac-bo", zoom: {}, man: "kham-pha", buoc: 1, cau: 0, chon: null, mo: false, ketQua: {}, xep: [], soan: null };
+
+function veBanDo(id, tuy = {}) {
+  if (tuy.pb) return vePacBo(id, tuy);
+  const lop = tuy.lop || S.lop, z = S.zoom[id] || { s: 1, x: 0, y: 0 }, w = 900 / z.s, h = 620 / z.s;
+  const vx = 450 - w / 2 + z.x, vy = 310 - h / 2 + z.y;
+  let s = `<svg class="bd" viewBox="${vx} ${vy} ${w} ${h}" data-bd="${id}">
+  <defs><radialGradient id="gDat${id}" cx=".5" cy=".5" r=".7"><stop offset="0" stop-color="#d9f0b6"/><stop offset="1" stop-color="#a8d08d"/></radialGradient>
+  <pattern id="pNgoai${id}" width="14" height="14" patternUnits="userSpaceOnUse"><rect width="14" height="14" fill="#efe6cf"/><path d="M0 14 L14 0" stroke="#e2d6b5" stroke-width="2"/></pattern></defs>
+  <rect x="-200" y="-200" width="1300" height="1020" fill="url(#pNgoai${id})"/>
+  <path d="${TINH}" fill="url(#gDat${id})" stroke="none"/>`;
+  if (lop["dia-hinh"]) { // vùng núi cao: tô đậm + kí hiệu núi
+    s += `<path d="M180,250 C230,200 300,190 350,215 C390,240 360,300 300,310 C240,320 170,300 180,250Z" fill="#c4a574" opacity=".55"/>
+      <path d="M560,140 C620,120 690,150 720,190 C740,230 700,250 650,240 C600,230 540,190 560,140Z" fill="#c4a574" opacity=".5"/>
+      <path d="M240,380 C280,350 340,360 360,400 C370,440 320,460 280,450 C240,440 220,410 240,380Z" fill="#c4a574" opacity=".55"/>`;
+    [[230, 255], [280, 235], [320, 270], [600, 170], [660, 200], [690, 165], [280, 410], [325, 425], [460, 220], [610, 400], [400, 430]].forEach(([x, y]) =>
+      s += `<path d="M${x - 16} ${y + 12} L${x} ${y - 14} L${x + 16} ${y + 12}Z" fill="#8d6e4a"/><path d="M${x - 5} ${y - 6} L${x} ${y - 14} L${x + 5} ${y - 6}Z" fill="#fff" opacity=".8"/>`);
+  }
+  if (lop["song"]) {
+    s += `<path d="M360,170 C400,220 430,250 470,290 C500,320 540,330 580,310 C630,285 680,290 720,270 C745,258 765,262 785,250" fill="none" stroke="#2b8fd6" stroke-width="7" stroke-linecap="round"/>
+      <path d="M680,105 C700,125 720,128 745,138" fill="none" stroke="#2b8fd6" stroke-width="5" stroke-linecap="round"/>
+      <text x="610" y="330" font-size="17" font-style="italic" font-weight="700" fill="#1d4ed8">S. Bằng Giang</text>
+      <text x="720" y="122" font-size="15" font-style="italic" font-weight="700" fill="#1d4ed8">S. Quây Sơn</text>`;
+  }
+  if (lop["ranh-gioi"]) s += `<path d="${RANH_GIOI}" fill="none" stroke="#6b5b95" stroke-width="4" stroke-dasharray="12 8"/>`;
+  if (lop["bien-gioi"]) s += `<path d="${BIEN_GIOI}" fill="none" stroke="#c0262d" stroke-width="6" stroke-dasharray="18 6 4 6"/>`;
+  if (lop["lang-gieng"]) {
+    s += `<g font-weight="900" fill="#64748b" letter-spacing="3"><text x="470" y="45" font-size="26" text-anchor="middle">TRUNG QUỐC</text>
+      <text x="850" y="300" font-size="22" text-anchor="middle" transform="rotate(90 850 300)">TRUNG QUỐC</text>
+      <text x="55" y="330" font-size="20" text-anchor="middle" transform="rotate(-90 55 330)">TUYÊN QUANG</text>
+      <text x="380" y="580" font-size="22" text-anchor="middle">THÁI NGUYÊN</text><text x="770" y="510" font-size="22" text-anchor="middle">LẠNG SƠN</text></g>`;
+  }
+  s += `<text x="470" y="265" font-size="30" font-weight="900" fill="#14532d" opacity=".55" text-anchor="middle" letter-spacing="6">CAO BẰNG</text>`;
+  // la bàn
+  s += `<g transform="translate(${vx + w - 70} ${vy + 70}) scale(${1 / z.s})" ${tuy.sangBac ? 'class="sang"' : ""}><circle r="44" fill="#fff" opacity=".9" stroke="#1f2937" stroke-width="2"/>
+    <path d="M0 -38 L9 0 L0 8 L-9 0Z" fill="#dc2626"/><path d="M0 38 L9 0 L0 -8 L-9 0Z" fill="#1f2937"/>
+    <text y="-48" text-anchor="middle" font-size="18" font-weight="900" fill="#dc2626">B</text><text y="62" text-anchor="middle" font-size="14" font-weight="800" fill="#1f2937">N</text>
+    <text x="54" y="5" text-anchor="middle" font-size="14" font-weight="800" fill="#1f2937">Đ</text><text x="-54" y="5" text-anchor="middle" font-size="14" font-weight="800" fill="#1f2937">T</text></g>`;
+  if (lop["ghim"]) GHIM.forEach(g => {
+    const L = LOAI[g.loai] || LOAI.khac, chon = (tuy.chon || S.chonGhim) === g.id, nho = 1 / Math.sqrt(z.s);
+    s += `<g class="ghim ${chon ? "chon" : ""} ${tuy.sangLoai && tuy.sangLoai === g.loai ? "sang" : ""}" data-id="${g.id}" transform="translate(${g.x} ${g.y}) scale(${nho})">
+      <ellipse cx="0" cy="2" rx="12" ry="4" fill="#000" opacity=".25"/>
+      <path class="vong" d="M0 0 C-6 -14 -22 -22 -22 -40 a22 22 0 0 1 44 0 C22 -22 6 -14 0 0Z" fill="${L.mau}" stroke="#fff" stroke-width="3"/>
+      <text y="-32" text-anchor="middle" font-size="${L.ky.length > 1 ? 20 : 22}" font-weight="900" fill="#fff">${L.ky}</text>
+      ${tuy.anTen ? "" : `<text y="26" text-anchor="middle" font-size="16" font-weight="800" fill="#111827" stroke="#fff" stroke-width="4" paint-order="stroke">${g.ten}</text>`}</g>`;
+  });
+  s += `</svg><div class="ten-bd ${tuy.sangTen ? "sang" : ""}">LƯỢC ĐỒ TỈNH CAO BẰNG<small>minh hoạ, không theo tỉ lệ</small></div>
+    <div class="dieu-bd"><button data-z="+" title="Phóng to">+</button><button data-z="-" title="Thu nhỏ">−</button><button data-z="0" title="Về giữa">⌂</button></div>`;
+  return s;
+}
+function ganBanDo(id, khung, khiCham) {
+  khung.innerHTML = veBanDo(id, khung._tuy || {});
+  khung.querySelectorAll("[data-z]").forEach(b => b.onclick = () => { const z = S.zoom[id] || { s: 1, x: 0, y: 0 };
+    if (b.dataset.z === "+") z.s = Math.min(3, z.s * 1.4); else if (b.dataset.z === "-") z.s = Math.max(1, z.s / 1.4); else { z.s = 1; z.x = 0; z.y = 0; }
+    if (z.s === 1) { z.x = 0; z.y = 0; } S.zoom[id] = z; ganBanDo(id, khung, khiCham); });
+  const svg = khung.querySelector("svg.bd");
+  // kéo để di chuyển khi phóng to; kéo ghim khi ở màn soạn
+  let keo = null;
+  svg.addEventListener("pointerdown", e => { const g = e.target.closest(".ghim"); const p = diemSVG(svg, e);
+    keo = { g: g && id === "soan" ? g.dataset.id : null, x0: p.x, y0: p.y, cx: e.clientX, cy: e.clientY, z: Object.assign({ s: 1, x: 0, y: 0 }, S.zoom[id]), dichuyen: false };
+    if (keo.g || keo.z.s > 1) svg.setPointerCapture(e.pointerId); });
+  svg.addEventListener("pointermove", e => { if (!keo) return; if (Math.abs(e.clientX - keo.cx) + Math.abs(e.clientY - keo.cy) > 6) keo.dichuyen = true; if (!keo.dichuyen) return;
+    if (keo.g) { const p = diemSVG(svg, e), g = GHIM.find(x => x.id === keo.g); g.x = Math.round(p.x); g.y = Math.round(p.y);
+      const el = svg.querySelector(`.ghim[data-id="${keo.g}"]`); el.setAttribute("transform", `translate(${g.x} ${g.y}) scale(${1 / Math.sqrt(keo.z.s)})`); }
+    else if (keo.z.s > 1) { const r = svg.getBoundingClientRect(), k = 900 / keo.z.s / r.width; S.zoom[id] = { s: keo.z.s, x: keo.z.x - (e.clientX - keo.cx) * k, y: keo.z.y - (e.clientY - keo.cy) * k };
+      const z = S.zoom[id], w = 900 / z.s, h = 620 / z.s; svg.setAttribute("viewBox", `${450 - w / 2 + z.x} ${310 - h / 2 + z.y} ${w} ${h}`); } });
+  svg.addEventListener("pointerup", e => { const k = keo; keo = null; if (!k) return;
+    if (k.dichuyen) { if (k.g) { luu("cb_ghim", GHIM); ganBanDo(id, khung, khiCham); } else if (k.z.s > 1) ganBanDo(id, khung, khiCham); return; }
+    const g = e.target.closest(".ghim"); if (khiCham) khiCham(g ? g.dataset.id : null, e); });
+}
+function diemSVG(svg, e) { const p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY; return p.matrixTransform(svg.getScreenCTM().inverse()); }
+
+/* ---------- KHÁM PHÁ ---------- */
+function veKhamPha() {
+  $("#dsLop").innerHTML = LOP_BD.map(l => `<div class="cong ${S.lop[l.k] ? "" : "tat"}" data-k="${l.k}">${l.ky}<span>${l.t}</span><span class="cong-tat"></span></div>`).join("");
+  $("#dsLop").querySelectorAll(".cong").forEach(c => c.onclick = () => { S.lop[c.dataset.k] = !S.lop[c.dataset.k]; veKhamPha(); });
+  ganBanDo("kham-pha", $("#khungBd1"), id => { if (id) { S.chonGhim = id; tieng("chon"); veKhamPha(); } });
+  const g = GHIM.find(x => x.id === S.chonGhim) || GHIM[0], L = g ? LOAI[g.loai] || LOAI.khac : null;
+  $("#theTT").innerHTML = g ? `<h3><span style="color:${L.mau}">${L.ky}</span> ${g.ten}</h3><div class="hinh-tt">${HINH[g.hinh] || HINH.khac}</div>
+    <p>${g.mo}</p><span class="kiem">Loại: ${L.ten} · lược đồ minh hoạ, vị trí gần đúng</span>${g.id === "pac-bo" ? `<div class="dieu"><button class="nut vang" id="btVaoPB">🔑 Vào lược đồ Pác Bó</button></div>` : ""}` : `<h3>Chạm vào ghim trên lược đồ</h3>`;
+  if ($("#btVaoPB")) $("#btVaoPB").onclick = () => moMan("pac-bo");
+}
+
+/* ---------- ĐỌC LƯỢC ĐỒ 3 BƯỚC ---------- */
+const BUOC = [
+  { t: "Đọc tên lược đồ", loi: "Tên lược đồ cho biết lược đồ <b>thể hiện cái gì, ở đâu</b>.", hoi: "👉 Lược đồ này thể hiện tỉnh nào? Vì sao gọi là <b>lược đồ</b> mà không phải bản đồ? <i>(nội dung giản lược hơn)</i>", tuy: {} },
+  { t: "Xem chú giải", loi: "Chú giải cho biết <b>mỗi kí hiệu, màu sắc</b> nghĩa là gì. Luôn đọc chú giải trước khi tìm.", hoi: "👉 Kí hiệu ▲ màu đỏ là gì? Đường đỏ chấm gạch khác đường tím đứt đoạn thế nào?", tuy: { sangLoai: "di-tich" } },
+  { t: "Tìm đối tượng", loi: "Tìm đối tượng <b>dựa vào kí hiệu</b>, rồi nói vị trí theo hướng: trên – <b>Bắc</b>, dưới – <b>Nam</b>, phải – <b>Đông</b>, trái – <b>Tây</b>.", hoi: "👉 Thác Bản Giốc nằm ở phía nào của tỉnh? Cao Bằng giáp nước nào ở phía Bắc?", tuy: { sangBac: true } }
+];
+function veDocBanDo() {
+  $("#buoc3").innerHTML = BUOC.map((b, i) => `<button class="${S.buoc === i + 1 ? "on" : ""}" data-b="${i + 1}"><b>${i + 1}</b>${b.t}</button>`).join("");
+  $("#buoc3").querySelectorAll("button").forEach(b => b.onclick = () => { S.buoc = +b.dataset.b; veDocBanDo(); });
+  const b = BUOC[S.buoc - 1]; $("#loiBuoc").innerHTML = `<div class="to">Bước ${S.buoc}. ${b.t}</div>${b.loi}<p style="margin:10px 0 0">${b.hoi}</p>`;
+  const k = $("#khungBd2"); k._tuy = b.tuy; ganBanDo("doc", k);
+  if (S.buoc === 1) k.querySelector(".ten-bd").classList.add("sang");
+  $("#chuGiai").innerHTML = LOP_BD.filter(l => l.k !== "ghim").map(l => `<div class="cong" style="cursor:default">${l.ky}<span>${l.t}</span></div>`).join("") +
+    Object.values(LOAI).map(L => `<div class="cong" style="cursor:default"><svg class="ky" viewBox="0 0 34 24"><circle cx="17" cy="12" r="10" fill="${L.mau}"/><text x="17" y="17" text-anchor="middle" font-size="12" font-weight="900" fill="#fff">${L.ky.length > 1 ? "" : L.ky}</text></svg><span>${L.ky.length > 1 ? L.ky + " " : ""}${L.ten}</span></div>`).join("");
+}
+
+/* ---------- THỬ THÁCH (đọc lược đồ — chẩn đoán lỗi — gợi ý 3 bậc — bản đồ lỗi cả lớp) ---------- */
+const LOI = { "doc-ten": "Chưa đọc tên lược đồ", "dong-tay": "Nhầm Đông – Tây", "bac-nam": "Nhầm Bắc – Nam", "chu-giai": "Chưa đọc chú giải", "ranh": "Nhầm biên giới quốc gia với ranh giới tỉnh", "tiep-giap": "Nhầm tỉnh tiếp giáp", "huong-cheo": "Chưa nói đủ hướng (Đông Bắc, Đông Nam…)" };
+const KHOA_LOI = Object.keys(LOI);
+const CACH_SUA = {
+  "doc-ten": "Đọc tên lược đồ trước tiên: tên cho biết lược đồ vẽ nơi nào, nói về cái gì.",
+  "dong-tay": "Nhìn la bàn: chữ Đ ở bên phải, chữ T ở bên trái. Giơ tay phải là hướng Đông.",
+  "bac-nam": "Trên là Bắc, dưới là Nam. Mũi tên đỏ của la bàn luôn chỉ hướng Bắc.",
+  "chu-giai": "Đọc chú giải trước khi tìm: mỗi kí hiệu, mỗi màu, mỗi loại đường có một nghĩa riêng.",
+  "ranh": "Đường đỏ chấm gạch = biên giới quốc gia. Đường tím đứt đoạn = ranh giới giữa các tỉnh.",
+  "tiep-giap": "Đọc nhãn chữ sát mép lược đồ: đó là nước hoặc tỉnh giáp ở phía ấy.",
+  "huong-cheo": "Giữa hai hướng chính là hướng xiên: Đông Bắc, Tây Bắc, Đông Nam, Tây Nam."
+};
+const GOI_Y_CHUNG = ["Nhớ 3 bước đọc lược đồ: đọc tên – xem chú giải – tìm đối tượng.", "Nhìn la bàn và chú giải trên lược đồ, loại bớt đáp án chắc chắn sai.", "Quy ước: trên – Bắc, dưới – Nam, phải – Đông, trái – Tây."];
+/* 8 câu thử thách (mỗi câu có 3 gợi ý từ nhẹ đến rõ; gy = chỗ sáng lên trên lược đồ từ gợi ý 2) */
+const CAU_THI = [
+  { h: "Trên lược đồ, hướng Bắc ở phía nào?", lua: ["Phía trên", "Phía dưới", "Bên trái", "Bên phải"], d: 0, giai: "Quy ước: trên – Bắc, dưới – Nam, phải – Đông, trái – Tây. Mũi tên đỏ của la bàn chỉ hướng Bắc.",
+    sai: { 1: ["bac-nam", "Phía dưới là hướng Nam."], 2: ["dong-tay", "Bên trái là hướng Tây."], 3: ["dong-tay", "Bên phải là hướng Đông."] }, tuy: { sangBac: true },
+    g: ["Dùng bước 3: tìm la bàn ở góc lược đồ.", "Chữ B màu đỏ trên la bàn chỉ về phía nào của lược đồ — lên, xuống hay sang ngang?", "Quy ước: trên – Bắc, dưới – Nam, phải – Đông, trái – Tây. Em chọn đáp án có chữ «trên»."] },
+  { h: "Kí hiệu ▲ màu đỏ trên lược đồ là gì?", lua: ["Núi cao", "Di tích lịch sử", "Danh lam thắng cảnh", "Trường học"], d: 1, giai: "Xem chú giải: ghim ▲ màu đỏ là di tích lịch sử. Núi cũng vẽ hình ▲ nhưng màu nâu, có chóp trắng.",
+    sai: { 0: ["chu-giai", "Núi màu nâu; ▲ đỏ trên ghim là di tích lịch sử."], 2: ["chu-giai", "Danh lam thắng cảnh là ★ màu xanh lá."], 3: ["chu-giai", "Trường học là ghim màu xanh dương 🏫."] }, tuy: { sangLoai: "di-tich", anTen: true }, gy: { sangLoai: "di-tich" },
+    g: ["Dùng bước 2: xem chú giải trước khi đoán.", "Kí hiệu ▲ đỏ nằm trên ghim. Em so với ▲ nâu của núi: loại nào là di tích?", "Trong chú giải, ▲ màu đỏ là loại «Di tích lịch sử»."] },
+  { h: "Phía Tây của tỉnh Cao Bằng giáp tỉnh nào?", lua: ["Lạng Sơn", "Thái Nguyên", "Tuyên Quang", "Trung Quốc"], d: 2, giai: "Bên trái lược đồ là phía Tây: tỉnh Tuyên Quang.",
+    sai: { 0: ["dong-tay", "Lạng Sơn ở bên phải, phía dưới — phía Đông Nam."], 1: ["bac-nam", "Thái Nguyên ở phía dưới — phía Nam."], 3: ["tiep-giap", "Trung Quốc ở phía Bắc và phía Đông."] },
+    g: ["Dùng bước 3: tìm phương hướng trước, rồi mới tìm tên.", "Phía Tây là bên nào của lược đồ? Em nhìn nhãn chữ xoay dọc ở mép đó.", "Bên trái là Tây. Đọc nhãn chữ xoay dọc ở mép trái lược đồ."] },
+  { h: "Phía Nam của tỉnh Cao Bằng giáp tỉnh nào?", lua: ["Thái Nguyên", "Tuyên Quang", "Lạng Sơn", "Trung Quốc"], d: 0, giai: "Phía dưới lược đồ là phía Nam: tỉnh Thái Nguyên.",
+    sai: { 1: ["dong-tay", "Tuyên Quang ở bên trái — phía Tây."], 2: ["huong-cheo", "Lạng Sơn ở phía Đông Nam (dưới, bên phải)."], 3: ["bac-nam", "Trung Quốc ở phía trên — phía Bắc."] },
+    g: ["Dùng bước 3: tìm hướng trước. Phía Nam là phía nào?", "Dưới là Nam. Nhìn xuống đáy lược đồ: có một nhãn chữ ở đó.", "Nhãn ở đáy lược đồ (phía Nam) là tên tỉnh mở đầu bằng chữ «Thái»."] },
+  { h: "Đường màu đỏ chấm gạch ở phía Bắc và phía Đông tỉnh là gì?", lua: ["Sông", "Ranh giới tỉnh", "Biên giới quốc gia", "Đường giao thông"], d: 2, giai: "Chú giải: đường đỏ chấm gạch là biên giới quốc gia — Cao Bằng giáp Trung Quốc.",
+    sai: { 0: ["chu-giai", "Sông là đường màu xanh lam uốn khúc."], 1: ["ranh", "Ranh giới tỉnh là đường tím đứt đoạn; đường đỏ là biên giới quốc gia."], 3: ["chu-giai", "Lược đồ này không vẽ đường giao thông."] },
+    g: ["Dùng bước 2: xem chú giải các loại đường.", "Đường em hỏi màu đỏ, chấm gạch. Tìm đúng đường đó trong chú giải.", "Chú giải: đường đỏ chấm gạch = «Biên giới quốc gia»."] },
+  { h: "Thác Bản Giốc nằm ở phía nào của phường Nùng Trí Cao?", lua: ["Phía Bắc", "Phía Đông Bắc", "Phía Tây", "Phía Nam"], d: 1, giai: "Thác Bản Giốc ở phía trên (Bắc) và bên phải (Đông) so với phường → phía Đông Bắc.",
+    sai: { 0: ["huong-cheo", "Thác ở phía trên nhưng còn lệch sang phải — nói đủ: Đông Bắc."], 2: ["dong-tay", "Bên phải là phía Đông, không phải phía Tây."], 3: ["bac-nam", "Thác ở phía trên — phía Bắc, không phải phía Nam."] }, tuy: { chon: "ban-gioc" },
+    g: ["Dùng bước 3: tìm đối tượng rồi nói hướng so với phường.", "So với ghim 🏫 (phường Nùng Trí Cao), Bản Giốc lệch lên trên và lệch sang phải.", "Lên trên là Bắc, sang phải là Đông. Ghép lại: Đông Bắc."] },
+  { h: "Chạm vào trên lược đồ: khu di tích nằm sát biên giới phía Bắc.", cham: "pac-bo", giai: "Khu di tích Pác Bó: kí hiệu ▲ đỏ, sát đường biên giới phía Bắc.",
+    saiCham: { "tran-hung-dao": ["bac-nam", "Khu rừng Trần Hưng Đạo nằm phía dưới (Nam), xa biên giới phía Bắc."], "ban-gioc": ["chu-giai", "★ xanh là danh lam thắng cảnh, không phải di tích."], "truong": ["chu-giai", "Ghim 🏫 là trường em."] }, tuy: { anTen: true }, gy: { sangLoai: "di-tich" },
+    g: ["Dùng bước 2: kí hiệu của di tích là gì?", "Di tích lịch sử là ghim ▲ màu đỏ. Có hai ghim ▲ đỏ — một ghim sát biên giới.", "Biên giới ở phía Bắc (trên). Chạm ghim ▲ đỏ gần đường biên giới đó."] },
+  { h: "Chạm vào trên lược đồ: danh lam thắng cảnh ở phía Đông Bắc tỉnh.", cham: "ban-gioc", giai: "Thác Bản Giốc: kí hiệu ★ xanh, ở phía Đông Bắc, bên sông Quây Sơn.",
+    saiCham: { "pac-bo": ["chu-giai", "▲ đỏ là di tích lịch sử."], "tran-hung-dao": ["chu-giai", "▲ đỏ là di tích lịch sử."], "truong": ["chu-giai", "Ghim 🏫 là trường em."] }, tuy: { anTen: true }, gy: { sangLoai: "danh-thang" },
+    g: ["Dùng bước 2: kí hiệu của danh lam thắng cảnh là gì?", "Danh lam thắng cảnh là ghim ★ màu xanh lá.", "Chỉ có một ghim ★. Nó ở góc Đông Bắc, bên sông Quây Sơn."] }
+];
+/* 12 câu LUYỆN ĐÚNG LỖI — máy chọn theo lỗi cả lớp hay mắc nhất (mỗi lỗi 2 câu, chỉ dùng điều có trên lược đồ) */
+const LUYEN = [
+  { loi: "dong-tay", h: "Thác Bản Giốc nằm ở phía nào của Khu di tích Pác Bó?", lua: ["Phía Đông", "Phía Tây", "Phía Bắc", "Phía Nam"], d: 0, giai: "Thác Bản Giốc ở bên phải Pác Bó, mà bên phải là hướng Đông.",
+    sai: { 1: ["dong-tay", "Bên trái mới là phía Tây; Bản Giốc nằm bên phải Pác Bó."], 2: ["bac-nam", "Hai ghim gần như ngang nhau, nên không phải Bắc hay Nam."], 3: ["bac-nam", "Hai ghim gần như ngang nhau, nên không phải Bắc hay Nam."] }, tuy: { chon: "ban-gioc" },
+    g: ["Dùng bước 3: tìm hai ghim rồi so vị trí.", "Bản Giốc ở bên phải hay bên trái ghim Pác Bó?", "Bên phải là hướng Đông."] },
+  { loi: "dong-tay", h: "Trên la bàn, chữ Đ (Đông) nằm ở bên nào?", lua: ["Bên phải", "Bên trái", "Phía trên", "Phía dưới"], d: 0, giai: "Trên la bàn: B ở trên, N ở dưới, Đ bên phải, T bên trái.",
+    sai: { 1: ["dong-tay", "Bên trái là chữ T — hướng Tây."], 2: ["bac-nam", "Phía trên là chữ B — hướng Bắc."], 3: ["bac-nam", "Phía dưới là chữ N — hướng Nam."] }, tuy: { sangBac: true },
+    g: ["Tìm la bàn ở góc trên bên phải lược đồ.", "Chữ B ở trên, chữ N ở dưới. Hai chữ Đ và T ở hai bên.", "Đ là Đông — chữ này nằm ở bên phải la bàn."] },
+  { loi: "bac-nam", h: "Tỉnh Thái Nguyên nằm ở phía nào của tỉnh Cao Bằng?", lua: ["Phía Nam", "Phía Bắc", "Phía Đông", "Phía Tây"], d: 0, giai: "Nhãn THÁI NGUYÊN ở đáy lược đồ — phía dưới là hướng Nam.",
+    sai: { 1: ["bac-nam", "Phía Bắc ở trên (giáp Trung Quốc); Thái Nguyên nằm dưới."], 2: ["dong-tay", "Bên phải mới là Đông; Thái Nguyên nằm phía dưới."], 3: ["dong-tay", "Bên trái mới là Tây; Thái Nguyên nằm phía dưới."] },
+    g: ["Dùng bước 3: tìm nhãn tên tỉnh trên lược đồ.", "Nhãn THÁI NGUYÊN nằm ở trên, ở dưới hay bên cạnh tỉnh Cao Bằng?", "Dưới là Nam."] },
+  { loi: "bac-nam", h: "Đi từ phường Nùng Trí Cao lên phía Bắc, em gần đến nước nào?", lua: ["Trung Quốc", "Lào", "Thái Nguyên", "Lạng Sơn"], d: 0, giai: "Phía Bắc (trên) lược đồ là đường biên giới và nước Trung Quốc.",
+    sai: { 1: ["tiep-giap", "Lược đồ chỉ có nhãn TRUNG QUỐC ở phía Bắc."], 2: ["bac-nam", "Thái Nguyên là tỉnh, nằm ở phía Nam."], 3: ["huong-cheo", "Lạng Sơn là tỉnh ở phía Đông Nam, không phải phía Bắc."] },
+    g: ["Lên phía Bắc là đi lên phía trên lược đồ.", "Phía trên lược đồ có nhãn chữ lớn ghi tên một nước.", "Đáp án là tên nước nằm sát đường biên giới đỏ ở phía trên."] },
+  { loi: "chu-giai", h: "Kí hiệu ★ màu xanh lá trên lược đồ là gì?", lua: ["Danh lam thắng cảnh", "Di tích lịch sử", "Trường học", "Núi"], d: 0, giai: "Chú giải: ★ xanh lá là danh lam thắng cảnh.",
+    sai: { 1: ["chu-giai", "Di tích lịch sử là ▲ màu đỏ."], 2: ["chu-giai", "Trường học là ghim màu xanh dương 🏫."], 3: ["chu-giai", "Núi là ▲ màu nâu, vẽ trên nền đất."] }, tuy: { sangLoai: "danh-thang", anTen: true }, gy: { sangLoai: "danh-thang" },
+    g: ["Dùng bước 2: xem chú giải.", "Tìm trong chú giải kí hiệu hình ngôi sao.", "Chú giải: ★ là loại «Danh lam thắng cảnh»."] },
+  { loi: "chu-giai", h: "Đường màu xanh lam uốn khúc trên lược đồ là gì?", lua: ["Sông", "Biên giới quốc gia", "Ranh giới tỉnh", "Đường đi"], d: 0, giai: "Chú giải: đường xanh lam uốn khúc là sông.",
+    sai: { 1: ["ranh", "Biên giới quốc gia là đường đỏ chấm gạch."], 2: ["ranh", "Ranh giới tỉnh là đường tím đứt đoạn."], 3: ["chu-giai", "Lược đồ này không vẽ đường đi; xem lại chú giải."] },
+    g: ["Dùng bước 2: xem chú giải.", "Trong chú giải, loại đường nào có màu xanh lam?", "Đường xanh lam uốn lượn như dòng nước: đó là sông."] },
+  { loi: "ranh", h: "Đường màu tím đứt đoạn cho biết điều gì?", lua: ["Ranh giới giữa các tỉnh", "Biên giới quốc gia", "Sông", "Núi cao"], d: 0, giai: "Chú giải: đường tím đứt đoạn là ranh giới tỉnh.",
+    sai: { 1: ["ranh", "Biên giới quốc gia là đường đỏ chấm gạch, không phải đường tím."], 2: ["chu-giai", "Sông là đường xanh lam uốn khúc."], 3: ["chu-giai", "Núi vẽ bằng kí hiệu ▲ màu nâu."] },
+    g: ["Dùng bước 2: xem chú giải.", "Có hai loại đường ranh: đỏ chấm gạch và tím đứt đoạn. Em đang hỏi đường nào?", "Đường tím nằm giữa Cao Bằng và các tỉnh bạn: đó là ranh giới tỉnh."] },
+  { loi: "ranh", h: "Muốn biết Cao Bằng giáp nước nào, em nhìn vào đường nào?", lua: ["Đường đỏ chấm gạch", "Đường tím đứt đoạn", "Đường xanh lam", "Kí hiệu ▲ nâu"], d: 0, giai: "Biên giới quốc gia là đường đỏ chấm gạch; bên ngoài đường đó là nước láng giềng.",
+    sai: { 1: ["ranh", "Đường tím là ranh giới giữa các tỉnh, không phải giữa các nước."], 2: ["chu-giai", "Đường xanh lam là sông."], 3: ["chu-giai", "▲ nâu là núi."] },
+    g: ["Nước và tỉnh khác nhau: giữa các nước là biên giới.", "Trong chú giải, đường nào là «Biên giới quốc gia»?", "Đường đỏ chấm gạch ở phía trên và bên phải lược đồ."] },
+  { loi: "tiep-giap", h: "Phía Đông Nam tỉnh Cao Bằng giáp tỉnh nào?", lua: ["Lạng Sơn", "Thái Nguyên", "Tuyên Quang", "Trung Quốc"], d: 0, giai: "Góc dưới bên phải lược đồ (Đông Nam) là tỉnh Lạng Sơn.",
+    sai: { 1: ["huong-cheo", "Thái Nguyên nằm ngay phía dưới (Nam), chưa lệch sang Đông."], 2: ["dong-tay", "Tuyên Quang ở bên trái — phía Tây."], 3: ["tiep-giap", "Trung Quốc là nước, ở phía Bắc và phía Đông, không phải Đông Nam."] },
+    g: ["Đông Nam là góc dưới bên phải.", "Bật lớp tên tỉnh láng giềng, nhìn góc dưới bên phải.", "Nhãn ở góc dưới bên phải là tỉnh Lạng Sơn."] },
+  { loi: "tiep-giap", h: "Tỉnh Cao Bằng giáp nước nào?", lua: ["Trung Quốc", "Lào", "Cam-pu-chia", "Thái Lan"], d: 0, giai: "Cao Bằng chỉ giáp một nước: Trung Quốc, ở phía Bắc và phía Đông.",
+    sai: { 1: ["tiep-giap", "Đọc nhãn nước ở mép lược đồ: chỉ có TRUNG QUỐC."], 2: ["tiep-giap", "Đọc nhãn nước ở mép lược đồ: chỉ có TRUNG QUỐC."], 3: ["tiep-giap", "Đọc nhãn nước ở mép lược đồ: chỉ có TRUNG QUỐC."] },
+    g: ["Nước láng giềng nằm ngoài đường biên giới đỏ.", "Bật lớp «Tên nước, tỉnh láng giềng» và đọc nhãn chữ ở phía trên, phía phải.", "Nhãn ở phía trên và bên phải lược đồ cùng ghi tên một nước."] },
+  { loi: "huong-cheo", h: "Hướng nằm giữa Bắc và Đông gọi là gì?", lua: ["Đông Bắc", "Tây Bắc", "Đông Nam", "Tây Nam"], d: 0, giai: "Giữa Bắc và Đông là Đông Bắc.",
+    sai: { 1: ["dong-tay", "Tây Bắc nằm giữa Bắc và Tây."], 2: ["bac-nam", "Đông Nam nằm giữa Đông và Nam."], 3: ["huong-cheo", "Tây Nam nằm giữa Tây và Nam."] }, tuy: { sangBac: true },
+    g: ["Hướng xiên ghép tên hai hướng chính ở hai bên.", "Bắc ở trên, Đông ở bên phải: hướng giữa nằm ở góc nào?", "Góc trên bên phải của la bàn là Đông Bắc."] },
+  { loi: "huong-cheo", h: "Tỉnh Lạng Sơn nằm ở phía nào của tỉnh Cao Bằng?", lua: ["Đông Nam", "Đông Bắc", "Tây Nam", "Tây Bắc"], d: 0, giai: "Lạng Sơn ở góc dưới bên phải: vừa phía Nam vừa phía Đông → Đông Nam.",
+    sai: { 1: ["bac-nam", "Phía trên (Bắc) là Trung Quốc; Lạng Sơn nằm phía dưới."], 2: ["dong-tay", "Bên trái mới là Tây; Lạng Sơn nằm bên phải."], 3: ["huong-cheo", "Lạng Sơn không ở phía Tây hay phía Bắc."] },
+    g: ["Bật lớp tên tỉnh, tìm nhãn LẠNG SƠN.", "Nhãn nằm ở dưới và lệch sang phải so với giữa lược đồ.", "Dưới là Nam, phải là Đông → Đông Nam."] }
+];
+LUYEN.push(
+  { loi: "doc-ten", h: "Muốn biết lược đồ vẽ nơi nào, em đọc phần nào đầu tiên?", lua: ["Tên lược đồ", "Màu của sông", "Số ngọn núi", "Chữ B trên la bàn"], d: 0, giai: "Tên lược đồ cho biết lược đồ thể hiện cái gì, ở đâu.",
+    sai: { 1: ["doc-ten", "Màu của sông chưa cho biết lược đồ vẽ nơi nào."], 2: ["doc-ten", "Đếm núi chưa cho biết lược đồ vẽ nơi nào."], 3: ["doc-ten", "La bàn chỉ hướng, không cho biết lược đồ vẽ nơi nào."] }, tuy: { sangTen: true },
+    g: ["Dùng bước 1: đọc tên lược đồ.", "Tên lược đồ nằm trong khung chữ ở góc trên bên trái, đang nhấp nháy.", "Đáp án là «Tên lược đồ»."] },
+  { loi: "doc-ten", h: "Lược đồ trên màn hình vẽ tỉnh nào?", lua: ["Cao Bằng", "Lạng Sơn", "Thái Nguyên", "Tuyên Quang"], d: 0, giai: "Tên lược đồ ghi: LƯỢC ĐỒ TỈNH CAO BẰNG. Lạng Sơn, Thái Nguyên, Tuyên Quang chỉ là tỉnh láng giềng ghi ở mép.",
+    sai: { 1: ["doc-ten", "Lạng Sơn là tỉnh láng giềng ghi ở mép; tên lược đồ nói tỉnh được vẽ."], 2: ["doc-ten", "Thái Nguyên là tỉnh láng giềng ghi ở mép; tên lược đồ nói tỉnh được vẽ."], 3: ["doc-ten", "Tuyên Quang là tỉnh láng giềng ghi ở mép; tên lược đồ nói tỉnh được vẽ."] }, tuy: { sangTen: true },
+    g: ["Dùng bước 1: đọc tên lược đồ.", "Tên lược đồ nằm trong khung chữ ở góc trên bên trái, đang nhấp nháy.", "Tên tỉnh trong khung chữ đó bắt đầu bằng chữ «C»."] }
+);
+
+/* ---------- PÁC BÓ — 3 CHÌA KHOÁ (TÊN · CHÚ GIẢI · HƯỚNG) ----------
+   Lược đồ khu di tích MINH HOẠ, không theo tỉ lệ; vị trí các ghim GẦN ĐÚNG, dùng để dạy kĩ năng đọc lược đồ.
+   Cô đối chiếu Tài liệu giáo dục địa phương lớp 4 / sơ đồ trong SGK rồi sửa x, y, mô tả ở PB_GHIM nếu cần. */
+const LOAI_PB = { "moc": { ten: "Cột mốc biên giới", mau: "#b45309", ky: "◆" }, "di-tich": { ten: "Di tích lịch sử", mau: "#dc2626", ky: "▲" }, "nui": { ten: "Núi", mau: "#8d6e4a", ky: "⛰" } };
+const PB_GHIM = [
+  { id: "moc", loai: "moc", x: 470, y: 138, ten: "Cột mốc biên giới", mo: "Trên đường biên giới Việt Nam – Trung Quốc. Năm 1941, Bác Hồ qua biên giới để về nước.", hinh: "khac" },
+  { id: "coc-bo", loai: "di-tich", x: 470, y: 340, ten: "Hang Cốc Bó", mo: "Hang nhỏ bên suối Lê-nin, nơi Bác Hồ ở và làm việc trong những ngày đầu về nước.", hinh: "hang" },
+  { id: "khuoi-nam", loai: "di-tich", x: 750, y: 340, ten: "Lán Khuổi Nặm", mo: "Một địa điểm trong khu di tích, nơi Bác Hồ từng ở và làm việc.", hinh: "rung" },
+  { id: "cac-mac", loai: "nui", x: 470, y: 530, ten: "Núi Các Mác", mo: "Ngọn núi bên kia suối Lê-nin, Bác Hồ đặt tên là núi Các Mác.", hinh: "nui" }
+];
+const CHIA = [
+  { k: 1, bieu: "🏷️", ten: "Chìa khoá 1 — TÊN", mt: "Đọc tên lược đồ: lược đồ vẽ nơi nào, nói về điều gì?" },
+  { k: 2, bieu: "📒", ten: "Chìa khoá 2 — CHÚ GIẢI", mt: "Đọc chú giải: mỗi kí hiệu, mỗi loại đường có nghĩa gì?" },
+  { k: 3, bieu: "🧭", ten: "Chìa khoá 3 — HƯỚNG", mt: "Tìm hướng bằng la bàn: trên Bắc, dưới Nam, phải Đông, trái Tây." }
+];
+const PB_CAU = [
+  { id: "t1", chia: 1, h: "Tên lược đồ cho em biết điều gì?", lua: ["Lược đồ vẽ khu di tích Pác Bó", "Lược đồ vẽ tỉnh Cao Bằng", "Lược đồ vẽ thác Bản Giốc", "Lược đồ vẽ cả nước Việt Nam"], d: 0,
+    giai: "Tên lược đồ ở khung chữ góc trên bên trái: KHU DI TÍCH QUỐC GIA ĐẶC BIỆT PÁC BÓ. Đọc tên là biết lược đồ vẽ nơi nào.",
+    sai: { 1: ["doc-ten", "Lược đồ tỉnh Cao Bằng là lược đồ ở màn Khám phá; đây là lược đồ riêng của Pác Bó."], 2: ["doc-ten", "Tên lược đồ không nhắc tới thác Bản Giốc."], 3: ["doc-ten", "Tên lược đồ không ghi cả nước Việt Nam."] }, tuy: { pb: true, sangTen: true },
+    g: ["Dùng chìa khoá 1: tìm tên lược đồ.", "Tên lược đồ nằm trong khung chữ ở góc trên bên trái, đang nhấp nháy.", "Đọc dòng chữ in đậm trong khung đó."] },
+  { id: "t2", chia: 1, h: "Muốn biết lược đồ vẽ nơi nào, việc đầu tiên em làm là gì?", lua: ["Đọc tên lược đồ", "Đếm số cây", "Nhìn màu của suối", "Đếm số ngọn núi"], d: 0,
+    giai: "Đọc tên lược đồ trước tiên: tên cho biết lược đồ thể hiện cái gì, ở đâu.",
+    sai: { 1: ["doc-ten", "Số cây không cho biết lược đồ vẽ nơi nào."], 2: ["doc-ten", "Màu của suối chưa cho biết lược đồ vẽ nơi nào; hãy đọc tên."], 3: ["doc-ten", "Số ngọn núi chưa cho biết lược đồ vẽ nơi nào; hãy đọc tên."] }, tuy: { pb: true, sangTen: true },
+    g: ["Dùng chìa khoá 1.", "Muốn biết lược đồ nói về điều gì, em đọc dòng chữ đầu tiên của lược đồ.", "Dòng chữ đó chính là tên lược đồ."] },
+  { id: "c1", chia: 2, cham: "moc", h: "Chạm vào kí hiệu ◆ — cột mốc biên giới.", giai: "Chú giải: ◆ màu nâu là cột mốc biên giới, nằm sát đường biên giới đỏ chấm gạch.",
+    saiCham: { "coc-bo": ["chu-giai", "▲ đỏ là di tích lịch sử; cột mốc là ◆ màu nâu."], "khuoi-nam": ["chu-giai", "▲ đỏ là di tích lịch sử; cột mốc là ◆ màu nâu."], "cac-mac": ["chu-giai", "⛰ là núi; cột mốc là ◆ màu nâu."] }, tuy: { pb: true, anTen: true, sangChuGiai: true }, gy: { sangLoai: "moc" },
+    g: ["Dùng chìa khoá 2: nhìn khung CHÚ GIẢI ở góc dưới bên trái.", "Trong chú giải, kí hiệu ◆ màu nâu nghĩa là «Cột mốc biên giới».", "Chỉ có một ghim ◆, nằm sát đường biên giới đỏ chấm gạch."] },
+  { id: "c2", chia: 2, h: "Đường màu đỏ chấm gạch trên lược đồ là gì?", lua: ["Biên giới quốc gia", "Suối", "Ranh giới tỉnh", "Đường đi"], d: 0,
+    giai: "Chú giải: đường đỏ chấm gạch là biên giới quốc gia. Bên ngoài đường này là nước Trung Quốc.",
+    sai: { 1: ["chu-giai", "Suối là đường xanh lam uốn khúc."], 2: ["ranh", "Lược đồ này không vẽ ranh giới tỉnh; đường đỏ chấm gạch là biên giới giữa hai nước."], 3: ["chu-giai", "Lược đồ này không vẽ đường đi; xem lại chú giải."] }, tuy: { pb: true, sangChuGiai: true },
+    g: ["Dùng chìa khoá 2: nhìn khung CHÚ GIẢI.", "Tìm trong chú giải dòng có đường đỏ chấm gạch.", "Dòng đó ghi «Biên giới quốc gia»."] },
+  { id: "h1", chia: 3, h: "Từ cột mốc biên giới đến hang Cốc Bó, liên lạc viên đi về hướng nào?", lua: ["Hướng Nam", "Hướng Bắc", "Hướng Đông", "Hướng Tây"], d: 0,
+    giai: "Hang Cốc Bó nằm ngay phía dưới cột mốc. Dưới là hướng Nam, nên đi về hướng Nam.",
+    sai: { 1: ["bac-nam", "Hướng Bắc là lên trên; hang Cốc Bó nằm phía dưới cột mốc."], 2: ["dong-tay", "Hướng Đông là sang phải; hang Cốc Bó nằm ngay phía dưới cột mốc."], 3: ["dong-tay", "Hướng Tây là sang trái; hang Cốc Bó nằm ngay phía dưới cột mốc."] }, tuy: { pb: true, sangBac: true },
+    g: ["Dùng chìa khoá 3: tìm la bàn rồi so vị trí hai ghim.", "Hang Cốc Bó nằm phía trên hay phía dưới cột mốc? Có lệch sang trái hay sang phải không?", "Dưới là hướng Nam."] },
+  { id: "h2", chia: 3, h: "Lán Khuổi Nặm nằm ở phía nào của hang Cốc Bó?", lua: ["Phía Đông", "Phía Tây", "Phía Bắc", "Phía Nam"], d: 0,
+    giai: "Lán Khuổi Nặm ở bên phải hang Cốc Bó; bên phải là hướng Đông.",
+    sai: { 1: ["dong-tay", "Bên trái mới là phía Tây; lán nằm bên phải hang."], 2: ["bac-nam", "Hai ghim nằm ngang nhau, nên không phải Bắc hay Nam."], 3: ["bac-nam", "Hai ghim nằm ngang nhau, nên không phải Bắc hay Nam."] }, tuy: { pb: true, sangBac: true, chon: "khuoi-nam" },
+    g: ["Dùng chìa khoá 3: tìm hai ghim rồi so vị trí.", "Lán Khuổi Nặm ở bên phải hay bên trái hang Cốc Bó?", "Bên phải là hướng Đông."] },
+  { id: "h3", chia: 3, cham: "cac-mac", h: "Chạm vào kí hiệu ⛰ — ngọn núi ở phía Nam hang Cốc Bó, bên kia suối.", giai: "Núi Các Mác: kí hiệu ⛰, nằm phía dưới (Nam), bên kia dòng suối so với hang Cốc Bó.",
+    saiCham: { "coc-bo": ["bac-nam", "Hang Cốc Bó nằm phía Bắc của suối; núi ở bên kia suối, phía Nam."], "moc": ["bac-nam", "Cột mốc ở phía Bắc, xa suối."], "khuoi-nam": ["dong-tay", "Lán Khuổi Nặm ở bên phải hang (phía Đông), không phải phía Nam."] }, tuy: { pb: true, anTen: true }, gy: { sangLoai: "nui" },
+    g: ["Dùng chìa khoá 3: phía Nam là phía dưới lược đồ.", "Phía dưới hang Cốc Bó, bên kia dòng suối xanh, có kí hiệu ⛰.", "Chạm ghim ⛰ nằm ở phía dưới suối."] }
+];
+let PB_DAT = doc("cb_pb", null) || {}; if (typeof PB_DAT !== "object") PB_DAT = {};
+let PB_CHUP = false;
+const chiaMo = k => PB_CAU.filter(q => q.chia === k).every(q => PB_DAT[q.id]);
+function vePacBo(id, tuy = {}) {
+  const z = S.zoom[id] || { s: 1, x: 0, y: 0 }, w = 900 / z.s, h = 620 / z.s, vx = 450 - w / 2 + z.x, vy = 310 - h / 2 + z.y;
+  const BG = "M-100,150 C150,120 300,165 470,135 C640,105 760,150 1000,120", SUOI = "M-100,430 C150,380 300,420 470,385 C640,350 760,420 1000,380";
+  let s = `<svg class="bd" viewBox="${vx} ${vy} ${w} ${h}" data-bd="${id}">
+  <defs><radialGradient id="gDat${id}" cx=".5" cy=".5" r=".8"><stop offset="0" stop-color="#d9f0b6"/><stop offset="1" stop-color="#a8d08d"/></radialGradient>
+  <pattern id="pNgoai${id}" width="14" height="14" patternUnits="userSpaceOnUse"><rect width="14" height="14" fill="#efe6cf"/><path d="M0 14 L14 0" stroke="#e2d6b5" stroke-width="2"/></pattern></defs>
+  <rect x="-200" y="-300" width="1400" height="1200" fill="url(#gDat${id})"/>
+  <path d="${BG} L1000,-300 L-100,-300Z" fill="url(#pNgoai${id})"/>
+  <text x="640" y="70" font-size="26" font-weight="900" fill="#64748b" letter-spacing="3" text-anchor="middle">TRUNG QUỐC</text>`;
+  [[110, 240], [165, 275], [215, 225], [270, 300], [350, 250], [380, 300], [570, 250], [620, 300], [670, 255], [830, 240], [850, 295], [70, 330], [600, 200], [250, 190]].forEach(([x, y]) =>
+    s += `<circle cx="${x}" cy="${y}" r="10" fill="#6aa84f"/><circle cx="${x - 3}" cy="${y - 3}" r="4" fill="#8bc66b"/>`);
+  [[395, 480], [440, 462], [505, 468], [552, 496], [402, 542], [535, 548], [590, 535], [350, 520]].forEach(([x, y]) =>
+    s += `<path d="M${x - 20} ${y + 14} L${x} ${y - 18} L${x + 20} ${y + 14}Z" fill="#8d6e4a"/><path d="M${x - 6} ${y - 7} L${x} ${y - 18} L${x + 6} ${y - 7}Z" fill="#fff" opacity=".8"/>`);
+  s += `<path d="${SUOI}" fill="none" stroke="#2b8fd6" stroke-width="9" stroke-linecap="round"/>
+    <text x="610" y="418" font-size="18" font-style="italic" font-weight="700" fill="#1d4ed8">Suối Lê-nin</text>
+    <path d="${BG}" fill="none" stroke="#c0262d" stroke-width="6" stroke-dasharray="18 6 4 6"/>`;
+  s += `<g transform="translate(${vx + w - 70} ${vy + 70}) scale(${1 / z.s})" ${tuy.sangBac ? 'class="sang"' : ""}><circle r="44" fill="#fff" opacity=".9" stroke="#1f2937" stroke-width="2"/>
+    <path d="M0 -38 L9 0 L0 8 L-9 0Z" fill="#dc2626"/><path d="M0 38 L9 0 L0 -8 L-9 0Z" fill="#1f2937"/>
+    <text y="-48" text-anchor="middle" font-size="18" font-weight="900" fill="#dc2626">B</text><text y="62" text-anchor="middle" font-size="14" font-weight="800" fill="#1f2937">N</text>
+    <text x="54" y="5" text-anchor="middle" font-size="14" font-weight="800" fill="#1f2937">Đ</text><text x="-54" y="5" text-anchor="middle" font-size="14" font-weight="800" fill="#1f2937">T</text></g>`;
+  s += `<g transform="translate(${vx + 14 / z.s} ${vy + h - 14 / z.s}) scale(${1 / z.s})" ${tuy.sangChuGiai ? 'class="sang"' : ""}>
+    <rect y="-186" width="262" height="186" rx="12" fill="#fff" opacity=".93" stroke="#1f2937" stroke-width="2"/><text x="14" y="-160" font-size="16" font-weight="900" fill="#1f2937">CHÚ GIẢI</text>
+    <circle cx="28" cy="-130" r="11" fill="#dc2626"/><text x="28" y="-125" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">▲</text><text x="52" y="-124" font-size="15" font-weight="700" fill="#1f2937">Di tích lịch sử</text>
+    <circle cx="28" cy="-100" r="11" fill="#b45309"/><text x="28" y="-95" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">◆</text><text x="52" y="-94" font-size="15" font-weight="700" fill="#1f2937">Cột mốc biên giới</text>
+    <path d="M16 -60 L28 -82 L40 -60Z" fill="#8d6e4a"/><text x="52" y="-64" font-size="15" font-weight="700" fill="#1f2937">Núi</text>
+    <path d="M14 -42 Q22 -52 28 -42 T42 -42" fill="none" stroke="#2b8fd6" stroke-width="5" stroke-linecap="round"/><text x="52" y="-37" font-size="15" font-weight="700" fill="#1f2937">Suối</text>
+    <path d="M14 -14 H42" stroke="#c0262d" stroke-width="5" stroke-dasharray="9 3 2 3"/><text x="52" y="-9" font-size="15" font-weight="700" fill="#1f2937">Biên giới quốc gia</text></g>`;
+  PB_GHIM.forEach(g => {
+    const L = LOAI_PB[g.loai], chon = tuy.chon === g.id, nho = 1 / Math.sqrt(z.s);
+    s += `<g class="ghim ${chon ? "chon" : ""} ${tuy.sangLoai && tuy.sangLoai === g.loai ? "sang" : ""}" data-id="${g.id}" transform="translate(${g.x} ${g.y}) scale(${nho})">
+      <ellipse cx="0" cy="2" rx="12" ry="4" fill="#000" opacity=".25"/>
+      <path class="vong" d="M0 0 C-6 -14 -22 -22 -22 -40 a22 22 0 0 1 44 0 C22 -22 6 -14 0 0Z" fill="${L.mau}" stroke="#fff" stroke-width="3"/>
+      <text y="-32" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">${L.ky}</text>
+      ${tuy.anTen ? "" : `<text y="26" text-anchor="middle" font-size="16" font-weight="800" fill="#111827" stroke="#fff" stroke-width="4" paint-order="stroke">${g.ten}</text>`}</g>`;
+  });
+  s += `</svg><div class="ten-bd ${tuy.sangTen ? "sang" : ""}">KHU DI TÍCH QUỐC GIA ĐẶC BIỆT PÁC BÓ<small>lược đồ minh hoạ, không theo tỉ lệ</small></div>
+    <div class="dieu-bd"><button data-z="+" title="Phóng to">+</button><button data-z="-" title="Thu nhỏ">−</button><button data-z="0" title="Về giữa">⌂</button></div>`;
+  return s;
+}
+S.chonPB = "coc-bo";
+function vePacBoMan() {
+  const k = $("#khungBd5"); k._tuy = { pb: true, chon: S.chonPB };
+  ganBanDo("pb", k, id => { if (id) { S.chonPB = id; tieng("chon"); vePacBoMan(); } });
+  const tatCa = CHIA.every(c => chiaMo(c.k)), con = CHIA.filter(c => !chiaMo(c.k)).length;
+  $("#dsChia").innerHTML = CHIA.map(c => { const ds = PB_CAU.filter(q => q.chia === c.k), n = ds.filter(q => PB_DAT[q.id]).length, mo = n === ds.length;
+    return `<div class="chia ${mo ? "mo" : ""}"><div class="so-chia">${mo ? "🔑" : c.bieu}</div><div><h4>${c.ten}</h4><small>${c.mt}</small><div class="tt-chia">${mo ? "✅ Đã mở khoá" : n + "/" + ds.length + " câu đã đúng"}</div></div>
+      <button class="nut ${mo ? "phu" : ""}" data-chia="${c.k}">${mo ? "↺ Làm lại" : "▶ Bắt đầu"}</button></div>`; }).join("") +
+    (tatCa ? `<div class="hop mo"><div class="bieu">🎁</div><h3 style="margin:4px 0">Hộp bí mật đã mở!</h3><div style="line-height:1.55">Em đã dùng đủ <b>3 chìa khoá: TÊN – CHÚ GIẢI – HƯỚNG</b> để đọc lược đồ khu di tích Pác Bó. Trên lược đồ, em chỉ được cột mốc biên giới ở phía Bắc, hang Cốc Bó ở giữa và núi Các Mác bên kia suối.<br><b>🎖️ Liên lạc viên nhí</b></div></div>`
+      : `<div class="hop"><div class="bieu">🔒</div><h3 style="margin:4px 0">Hộp bí mật</h3><div style="color:var(--mo)">Còn ${con} chìa khoá nữa là mở được.</div></div>`);
+  $("#dsChia").querySelectorAll("[data-chia]").forEach(b => b.onclick = () => { const c = +b.dataset.chia; datLaiDS(PB_CAU.filter(q => q.chia === c), "pb" + c); moMan("thu-thach"); });
+  const g = PB_GHIM.find(x => x.id === S.chonPB) || PB_GHIM[0], L = LOAI_PB[g.loai];
+  $("#theTTpb").innerHTML = `<h3><span style="color:${L.mau}">${L.ky}</span> ${g.ten}</h3><div class="hinh-tt">${HINH[g.hinh] || HINH.khac}</div><p>${g.mo}</p><span class="kiem">Loại: ${L.ten} · lược đồ minh hoạ, vị trí gần đúng</span>`;
+}
+
+let CAU = CAU_THI;
+S.che = "thi"; S.gy = {}; S.phieu = {};
+
+/* ---------- nhật ký lớp: chỉ cộng dồn SỐ LƯỢT theo loại lỗi, không ghi tên em nào ---------- */
+let NK = doc("cb_nhat_ky", null);
+if (!NK || typeof NK !== "object") NK = {};
+NK.loi = NK.loi || {}; KHOA_LOI.forEach(k => { NK.loi[k] = +NK.loi[k] || 0; });
+["luot", "dung", "cau", "goiY"].forEach(k => { NK[k] = +NK[k] || 0; }); NK.da = NK.da || {};
+const luuNK = () => { if (!NK.demo) luu("cb_nhat_ky", NK); };
+let SI_SO = +doc("cb_si_so", 28) || 28;
+const phieu = () => S.phieu[S.cau] || (S.phieu[S.cau] = [0, 0, 0, 0]);
+function ghiNK() {
+  const c = CAU[S.cau], khoa = S.che + "#" + c.h; if (NK.da[khoa] || S.demo) return; NK.da[khoa] = 1; NK.cau++;
+  if ((S.gy[S.cau] || 0) > 0) NK.goiY++;
+  if (c.cham) { if (S.chon !== null) { NK.luot++; if (S.chon === c.cham) NK.dung++; else { const s = c.saiCham[S.chon]; if (s) NK.loi[s[0]]++; } } }
+  else { const p = phieu(), tong = p.reduce((a, b) => a + b, 0);
+    if (tong > 0) { NK.luot += tong; p.forEach((n, i) => { if (i === c.d) NK.dung += n; else if (n > 0) NK.loi[(c.sai[i] || ["chu-giai"])[0]] += n; }); }
+    else if (S.chon !== null) { NK.luot++; if (S.chon === c.d) NK.dung++; else NK.loi[(c.sai[S.chon] || ["chu-giai"])[0]]++; } }
+  luuNK(); }
+
+/* ---------- MÁY ĐẾM THẺ MÀU — máy học trên máy (k láng giềng gần nhất trên màu), không lưu ảnh, không gửi đi ---------- */
+/*PURE-BEGIN*/
+const MAY_W = 128, MAY_H = 96, MAY_BW = 32, MAY_BH = 24;   // khung ảnh nhỏ 128×96; ô dạy thẻ 32×24 ở giữa
+let NGUONG = 0.12, S_MIN = 0.28, V_MIN = 0.15;              // độ nhạy: NGUONG càng lớn càng dễ nhận (đổi bằng thanh «Độ nhạy»)
+function dacTrung(r, g, b) {                       // điểm ảnh → (cos sắc, sin sắc, độ đậm nhẹ) — gần như KHÔNG phụ thuộc độ sáng
+  const mx = Math.max(r, g, b), mn = Math.min(r, g, b), v = mx / 255, s = mx ? (mx - mn) / mx : 0; let h = 0;
+  if (mx !== mn) { const d = mx - mn; h = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h *= Math.PI / 3; }
+  return [Math.cos(h), Math.sin(h), Math.min(1, s) * 0.3, s, v]; }
+function phanLoaiDiem(f, mau, K) {                 // mau: [{k:"A"…"N", f:[3 số]}] → "A".."D" hoặc "N" (nền)
+  const ds = []; for (let i = 0; i < mau.length; i++) { const m = mau[i].f, a = f[0] - m[0], b = f[1] - m[1], c = f[2] - m[2]; ds.push([a * a + b * b + c * c, mau[i].k]); }
+  if (!ds.length) return "N"; ds.sort((x, y) => x[0] - y[0]); if (ds[0][0] > NGUONG) return "N";   // xa mọi mẫu đã dạy → nền
+  const dem = {}; ds.slice(0, K || 5).forEach(([d, k]) => { dem[k] = (dem[k] || 0) + 1; });
+  let tot = "N", n = 0; for (const k in dem) if (dem[k] > n) { n = dem[k]; tot = k; } return tot; }
+function demThe(data, W, H, mau) {                 // data: RGBA → số điểm mỗi thẻ + bản đồ màu
+  const dem = { A: 0, B: 0, C: 0, D: 0, N: 0 }, mask = new Array(W * H);
+  for (let i = 0; i < W * H; i++) { const f = dacTrung(data[i * 4], data[i * 4 + 1], data[i * 4 + 2]); let k = "N";
+    if (f[3] > S_MIN && f[4] > V_MIN) k = phanLoaiDiem(f, mau, 5);     // chỉ xét điểm có màu rõ, không quá tối
+    dem[k]++; mask[i] = k; }
+  return { dem, mask }; }
+function chiaThe(dem, W, H) {                      // tỉ lệ A,B,C,D theo diện tích thẻ; null nếu chưa thấy thẻ
+  const t = dem.A + dem.B + dem.C + dem.D; if (t < W * H * 0.004) return null; return ["A", "B", "C", "D"].map(k => dem[k] / t); }
+function layMau(k, data, W, H, soMau) {            // lấy mẫu để dạy: thẻ → ô giữa khung; nền → rải khắp khung (chỉ lấy điểm có màu rõ để nền không «nuốt» thẻ)
+  const out = [], ox = (W - MAY_BW) >> 1, oy = (H - MAY_BH) >> 1;
+  for (let n = 0, thu = 0; n < soMau && thu < soMau * 20; thu++) { let x, y; if (k === "N") { x = Math.random() * W | 0; y = Math.random() * H | 0; } else { x = ox + (Math.random() * MAY_BW | 0); y = oy + (Math.random() * MAY_BH | 0); }
+    const i = (y * W + x) * 4, f = dacTrung(data[i], data[i + 1], data[i + 2]);
+    if (!(f[3] > S_MIN && f[4] > V_MIN)) { if (k === "N") continue; }   // thẻ: giữ mọi điểm trong ô; nền: bỏ điểm xám/tối (đã bị loại từ trước)
+    out.push({ k, f: [f[0], f[1], f[2]].map(z => Math.round(z * 1000) / 1000) }); n++; }
+  return out; }
+/*PURE-END*/
+NGUONG = +doc("cb_may_nhay", 0.12) || 0.12;
+const MAY = { luong: null, video: null, chay: false, tmr: null, hoc: null, chia: null, ml: doc("cb_may_mau", null) || { A: [], B: [], C: [], D: [], N: [] } };
+["A", "B", "C", "D", "N"].forEach(k => { if (!Array.isArray(MAY.ml[k])) MAY.ml[k] = []; });
+const MAU_THE = { A: "#f43f5e", B: "#3b82f6", C: "#f59e0b", D: "#a855f7", N: "#0f172a" };
+const mauDay = () => [].concat(MAY.ml.A, MAY.ml.B, MAY.ml.C, MAY.ml.D, MAY.ml.N);
+function khungHinh() {
+  const v = MAY.video; if (!v || v.readyState < 2) return;
+  const cv = MAY.cvAn || (MAY.cvAn = Object.assign(document.createElement("canvas"), { width: MAY_W, height: MAY_H })), x = cv.getContext("2d", { willReadFrequently: true });
+  x.save(); x.translate(MAY_W, 0); x.scale(-1, 1); x.drawImage(v, 0, 0, MAY_W, MAY_H); x.restore();   // lật gương; ảnh chỉ nằm trong bộ nhớ, không lưu
+  const id = x.getImageData(0, 0, MAY_W, MAY_H);
+  if (MAY.hoc) { const h = MAY.hoc; MAY.ml[h.k] = MAY.ml[h.k].concat(layMau(h.k, id.data, MAY_W, MAY_H, 40)).slice(-120); if (--h.con <= 0) { MAY.hoc = null; luu("cb_may_mau", MAY.ml); veMay(); bao("Đã dạy xong " + (h.k === "N" ? "nền" : "thẻ " + h.k)); } }
+  xuLyKhung(id); }
+function xuLyKhung(id) {
+  const kq = demThe(id.data, MAY_W, MAY_H, mauDay()), cs = chiaThe(kq.dem, MAY_W, MAY_H);
+  MAY.chia = cs ? (MAY.chia ? cs.map((z, i) => MAY.chia[i] * 0.5 + z * 0.5) : cs) : null;   // làm mượt giữa các khung
+  const cv = $("#mayCv"); if (cv) { const x = cv.getContext("2d"), im = x.createImageData(MAY_W, MAY_H);
+    kq.mask.forEach((k, i) => { const m = MAU_THE[k], r = parseInt(m.slice(1, 3), 16), g = parseInt(m.slice(3, 5), 16), b = parseInt(m.slice(5, 7), 16); im.data.set([r, g, b, 255], i * 4); });
+    x.putImageData(im, 0, 0); x.strokeStyle = "#fff"; x.lineWidth = 1; x.strokeRect(((MAY_W - MAY_BW) >> 1) + .5, ((MAY_H - MAY_BH) >> 1) + .5, MAY_BW, MAY_BH); }
+  const tt = $("#mayTT"); if (tt) tt.textContent = MAY.chia ? "≈ " + ["A", "B", "C", "D"].map((K, i) => `${K} ${Math.round(MAY.chia[i] * SI_SO)}`).join(" · ") + ` (ước tính cho ${SI_SO} em)` : (mauDay().length ? "Chưa thấy thẻ — giơ thẻ cao hơn, hoặc kéo «Độ nhạy» sang phải" : "Máy chưa được dạy — làm bước ② bên dưới");
+  const dg = $("#mayDg"); if (dg) dg.textContent = `Máy nhận (số điểm màu): A ${kq.dem.A} · B ${kq.dem.B} · C ${kq.dem.C} · D ${kq.dem.D}`; }
+async function batMay() {
+  try { MAY.luong = await navigator.mediaDevices.getUserMedia({ video: { width: 320, height: 240 }, audio: false });
+    const v = MAY.video = document.createElement("video"); v.muted = true; v.playsInline = true; v.srcObject = MAY.luong; await v.play();
+    MAY.chay = true; clearInterval(MAY.tmr); MAY.tmr = setInterval(khungHinh, 180); bao("📷 Camera đã bật"); }
+  catch (e) { MAY.chay = false; bao("Không bật được camera — dùng nút − / + để đếm tay"); }
+  veMay(); }
+function tatMay() { clearInterval(MAY.tmr); MAY.tmr = null; try { if (MAY.luong) MAY.luong.getTracks().forEach(t => t.stop()); } catch (e) {} MAY.luong = null; MAY.video = null; MAY.chay = false; MAY.hoc = null; MAY.chia = null; }
+function veMay() {
+  const el = $("#may"); if (!el.classList.contains("on")) return;
+  const xong = k => MAY.ml[k].length >= 40;
+  el.innerHTML = `<div class="may-luoi"><div><canvas id="mayCv" width="${MAY_W}" height="${MAY_H}"></canvas><small>Chỉ hiện <b>mảng màu</b> máy nhận ra — không hiện hình người, không lưu ảnh, không gửi đi.</small></div>
+    <div><div class="tt" id="mayTT">${MAY.chay ? "Đang xem…" : "Camera đang tắt"}</div>
+    <div class="may-day">${["A", "B", "C", "D"].map(K => `<button data-k="${K}" class="${xong(K) ? "xong" : ""}" style="--m:var(--${K})">${xong(K) ? "✓ " : ""}Dạy thẻ ${K}</button>`).join("")}<button data-k="N" class="${xong("N") ? "xong" : ""}" style="--m:#475569">${xong("N") ? "✓ " : ""}Dạy nền</button></div>
+    <div class="pl-chan" style="margin:2px 0 6px">Độ nhạy <input id="mayNhay" type="range" min="6" max="40" value="${Math.round(NGUONG * 100)}" style="width:150px"><span id="mayNhayTr" style="font-weight:700">${Math.round(NGUONG * 100)}</span><small id="mayDg" style="margin-left:auto"></small></div>
+    <div class="dieu" style="margin:6px 0 0"><button class="nut nho" id="mayBat">${MAY.chay ? "⏹ Tắt camera" : "📷 Bật camera"}</button><button class="nut nho vang" id="mayLay">✅ Lấy số đếm</button><button class="nut phu nho" id="mayXoa">↺ Dạy lại</button></div>
+    <small>① Bật camera. ② Giơ thẻ A <b>to, sát camera, phủ kín ô trắng giữa khung</b>, bấm «Dạy thẻ A»; làm tương tự B, C, D. Rồi để lớp ngồi yên, không giơ thẻ, bấm «Dạy nền». Máy nhận theo <b>sắc màu</b> nên lớp hơi tối hoặc thẻ ở xa vẫn nhận; chưa nhận thì kéo «Độ nhạy» sang phải. ③ Cả lớp giơ thẻ → xem số ước tính → «Lấy số đếm». Đây là <b>ước tính theo diện tích thẻ</b>, cô chỉnh − / + nếu cần. Nên chọn thẻ khác màu khăn quàng và áo đồng phục.</small></div></div>`;
+  el.querySelectorAll("[data-k]").forEach(b => b.onclick = () => { if (!MAY.chay) { bao("Bật camera trước"); return; } MAY.ml[b.dataset.k] = []; MAY.hoc = { k: b.dataset.k, con: 3 }; bao("Giữ yên… máy đang học"); });
+  $("#mayNhay").oninput = e => { NGUONG = +e.target.value / 100; $("#mayNhayTr").textContent = e.target.value; luu("cb_may_nhay", NGUONG); };
+  $("#mayBat").onclick = () => MAY.chay ? (tatMay(), veMay()) : batMay();
+  $("#mayXoa").onclick = () => { MAY.ml = { A: [], B: [], C: [], D: [], N: [] }; luu("cb_may_mau", MAY.ml); veMay(); bao("Đã xoá phần máy đã học"); };
+  $("#mayLay").onclick = () => { if (S.mo) return; if (!MAY.chia) { bao("Chưa thấy thẻ để đếm"); return; }
+    S.phieu[S.cau] = MAY.chia.map(z => Math.round(z * SI_SO)); vePhieu(CAU[S.cau]); bao("Đã lấy số đếm — chỉnh − / + nếu cần"); };
+  xuLyKhung(MAY.cvAn ? MAY.cvAn.getContext("2d").getImageData(0, 0, MAY_W, MAY_H) : { data: new Uint8ClampedArray(MAY_W * MAY_H * 4) }); }
+
+/* ---------- vẽ màn thử thách ---------- */
+function veGoiY(c, gy) {
+  const g = c.g || GOI_Y_CHUNG, el = $("#goiY");
+  el.className = "goi-y" + (gy > 0 ? " on" : "");
+  el.innerHTML = gy > 0 ? `<div class="bac">${[1, 2, 3].map(i => `<i class="${i <= gy ? "d" : ""}"></i>`).join("")}</div>` + g.slice(0, gy).map((t, i) => `<div class="dong"><b>Gợi ý ${i + 1}:</b> ${t}</div>`).join("") : "";
+  const b = $("#btGoiY"); b.textContent = gy >= 3 ? "💡 Hết gợi ý" : gy ? `💡 Thêm gợi ý (${gy}/3)` : "💡 Gợi ý"; b.disabled = gy >= 3 || S.mo; b.style.opacity = b.disabled ? .5 : 1; }
+function vePhieu(c) {
+  const el = $("#phieuLop");
+  if (c.cham || S.mo) { el.style.display = "none"; $("#may").classList.remove("on"); if (MAY.chay) tatMay(); return; }   // mở đáp án rồi thì gọn lại, số phiếu hiện ở khung giải
+  el.style.display = "";
+  const p = phieu(), tong = p.reduce((a, b) => a + b, 0);
+  el.innerHTML = `<h4>🖐️ Cả lớp giơ thẻ <span style="font-weight:400;color:var(--mo)">${S.demo ? "· SỐ THỬ" : ""}</span><button class="nut phu nho" id="btMay" style="margin-left:auto">📷 Máy đếm thẻ</button></h4>
+    <div class="pl-luoi">${"ABCD".split("").map((K, i) => `<div class="pl-o" style="--m:var(--${K})"><span class="cc">${K}</span><div class="so">${p[i]}</div>
+      <div class="tg"><button data-d="${i}" data-v="-1" ${S.mo ? "disabled" : ""}>−</button><button data-d="${i}" data-v="1" ${S.mo ? "disabled" : ""}>+</button></div>
+      <div class="cot" style="width:${tong ? Math.round(p[i] * 100 / tong) : 0}%"></div></div>`).join("")}</div>
+    <div class="pl-chan">Sĩ số lớp <input id="siSo" type="number" min="1" max="60" value="${SI_SO}"> · đã đếm <b>${tong}</b> em ${tong > SI_SO ? "⚠️ nhiều hơn sĩ số" : ""}<button class="nut phu nho" id="btXoaPhieu" style="margin-left:auto">↺ Đếm lại</button></div>`;
+  el.querySelectorAll(".tg button").forEach(b => b.onclick = () => { if (S.mo) return; const q = phieu(); q[+b.dataset.d] = Math.max(0, q[+b.dataset.d] + +b.dataset.v); tieng("chon"); vePhieu(c); });
+  $("#siSo").onchange = e => { SI_SO = Math.max(1, Math.min(60, +e.target.value || 28)); luu("cb_si_so", SI_SO); vePhieu(c); };
+  $("#btXoaPhieu").onclick = () => { if (S.mo) return; S.phieu[S.cau] = [0, 0, 0, 0]; vePhieu(c); };
+  $("#btMay").onclick = () => { $("#may").classList.toggle("on"); if (!$("#may").classList.contains("on") && MAY.chay) tatMay(); veMay(); }; }
+function veThuThach() {
+  const c = CAU[S.cau], gy = S.gy[S.cau] || 0;
+  $("#tien").innerHTML = CAU.map((_, i) => `<i class="${i === S.cau ? "nay" : S.ketQua[i] === true ? "dg" : S.ketQua[i] === false ? "sa" : ""}"></i>`).join("");
+  const laPB = S.che.startsWith("pb");
+  $("#loaiCau").textContent = (laPB ? "🔑 Chìa khoá " + S.che.slice(2) + " · " : S.che !== "thi" ? "🎯 Luyện: " + LOI[S.che] + " · " : "") + (c.cham ? "🖐️ Chạm trên lược đồ" : "🟥🟦 Cả lớp giơ thẻ");
+  $("#btVe8").style.display = S.che !== "thi" ? "" : "none"; $("#btVe8").textContent = laPB ? "↩ Về Pác Bó" : "↩ Về 8 câu";
+  $("#cauHoi").textContent = `Câu ${S.cau + 1}. ${c.h}`;
+  const k = $("#khungBd3"); k._tuy = Object.assign({}, c.tuy || {}, gy >= 2 ? c.gy || {} : {}, c.cham && S.chon ? { chon: S.chon } : {}, c.cham && S.mo ? { chon: c.cham, anTen: false } : {});
+  ganBanDo("thu", k, c.cham ? id => { if (!id || S.mo) return; S.chon = id; moDapAn(); } : null);
+  $("#lua").innerHTML = c.cham ? `<div style="color:var(--mo);grid-column:1/-1">Một bạn lên chạm vào ghim trên TV (cô bấm thay cũng được).</div>` :
+    c.lua.map((t, i) => { const K = "ABCD"[i]; return `<button class="the ${S.chon === i ? "chon" : ""} ${S.mo && c.d === i ? "dung" : ""} ${S.mo && c.d !== i ? "mo-di" : ""}" data-i="${i}" style="--m:var(--${K})"><span class="cc">${K}</span>${t}</button>`; }).join("");
+  $("#lua").querySelectorAll(".the").forEach(b => b.onclick = () => { if (S.mo) return; S.chon = +b.dataset.i; tieng("chon"); veThuThach(); });
+  veGoiY(c, gy); vePhieu(c);
+  const gi = $("#giai");
+  if (S.mo) { const dung = c.cham ? S.chon === c.cham : S.chon === c.d, s = !dung && S.chon !== null ? (c.cham ? c.saiCham[S.chon] : c.sai[S.chon]) : null;
+    const p = c.cham ? null : phieu(), tong = p ? p.reduce((a, b) => a + b, 0) : 0; let lop = "";
+    if (tong) { const the = []; p.forEach((n, i) => { if (n && i !== c.d) the.push(`<span class="ten-loi">${LOI[(c.sai[i] || [])[0]] || "Chọn sai"}: ${n} em</span>`); });
+      lop = `<div style="margin:8px 0">🤖 Máy gom phiếu cả lớp: ${"ABCD".split("").map((K, i) => `${K} ${p[i]}`).join(" · ")} — đúng <b>${p[c.d]}/${tong}</b> em (${Math.round(p[c.d] * 100 / tong)}%)</div>${the.join(" ")}`; }
+    gi.className = "kinh giai on " + (dung || S.chon === null ? "ok" : "chua");
+    gi.innerHTML = (s ? `<span class="ten-loi">Lỗi: ${LOI[s[0]]}</span><div>${s[1]}</div>` : `<b>${S.chon === null ? "✨ Đáp án" : "🎉 Đúng rồi!"}</b>`) + lop + `<div>✅ ${c.giai}</div>` +
+      (c.chia && chiaMo(c.chia) ? `<div class="chia-mo">🔑 Chìa khoá ${c.chia} đã mở khoá! Bấm «↩ Về Pác Bó» để xem.</div>` : "");
+  } else gi.className = "kinh giai";
+  $("#soDung").textContent = Object.values(S.ketQua).filter(x => x).length; $("#soCau").textContent = CAU.length;
+}
+function moDapAn() { if (S.mo) return; const c = CAU[S.cau];
+  if (S.chon === null && !c.cham) { const p = phieu(), m = Math.max(...p); if (m > 0) S.chon = p.indexOf(m); }   // cả lớp chọn nhiều nhất
+  S.mo = true;
+  if (S.chon !== null) S.ketQua[S.cau] = c.cham ? S.chon === c.cham : S.chon === c.d;
+  if (c.chia && S.ketQua[S.cau] && !S.demo && !PB_CHUP) { PB_DAT[c.id] = 1; luu("cb_pb", PB_DAT); }
+  ghiNK();
+  const dung = S.chon === null || S.ketQua[S.cau]; tieng(dung ? "dung" : "sai"); if (dung) phaoGiay(); veThuThach();
+  if (!dung && c.cham) $(`#khungBd3 .ghim[data-id="${S.chon}"]`)?.classList.add("sai-cham"); }
+function datLaiDS(ds, che) { CAU = ds; S.che = che; S.cau = 0; S.chon = null; S.mo = false; S.ketQua = {}; S.gy = {}; S.phieu = {}; S.demo = false; }
+$("#btMo").onclick = moDapAn;
+$("#btGoiY").onclick = () => { if (S.mo) return; S.gy[S.cau] = Math.min(3, (S.gy[S.cau] || 0) + 1); tieng("chon"); veThuThach(); };
+$("#btTiep").onclick = () => { S.cau = (S.cau + 1) % CAU.length; S.chon = null; S.mo = false; veThuThach(); };
+$("#btTruoc").onclick = () => { S.cau = (S.cau - 1 + CAU.length) % CAU.length; S.chon = null; S.mo = false; veThuThach(); };
+$("#btVe8").onclick = () => { if (S.che.startsWith("pb")) { datLaiDS(CAU_THI, "thi"); moMan("pac-bo"); return; } datLaiDS(CAU_THI, "thi"); veThuThach(); };
+
+/* ---------- LỖI CẢ LỚP (bản đồ lỗi) ---------- */
+function veLoiLop() {
+  const sai = KHOA_LOI.reduce((a, k) => a + NK.loi[k], 0), tiLe = NK.luot ? Math.round(NK.dung * 100 / NK.luot) : 0;
+  const nhat = KHOA_LOI.reduce((a, k) => NK.loi[k] > NK.loi[a] ? k : a, KHOA_LOI[0]), toiDa = Math.max(1, ...KHOA_LOI.map(k => NK.loi[k]));
+  $("#daiThu").innerHTML = NK.demo ? `<div class="dai-thu">DỮ LIỆU THỬ — hình minh hoạ giao diện, KHÔNG phải số liệu của lớp</div>` : "";
+  $("#kpi").innerHTML = [["🙋", NK.luot, "lượt trả lời"], ["✅", NK.luot ? tiLe + "%" : "—", "lượt chọn đúng"], ["🧩", NK.cau, "câu đã làm"], ["💡", NK.goiY, "câu có dùng gợi ý"]]
+    .map(([i, v, t]) => `<div class="kinh"><span style="font-size:28px">${i}</span><b>${v}</b><span>${t}</span></div>`).join("");
+  $("#dsLoi").innerHTML = KHOA_LOI.slice().sort((a, b) => NK.loi[b] - NK.loi[a]).map(k => `<div class="hang-loi ${sai && k === nhat ? "nhat" : ""}"><div class="ten"><b>${LOI[k]}</b><small>${CACH_SUA[k]}</small></div>
+    <div class="cot-n"><i style="width:${NK.loi[k] * 100 / toiDa}%"></i></div><div class="n">${NK.loi[k]}</div><button class="nut nho ${sai && k === nhat ? "vang" : "phu"}" data-luyen="${k}">▶ Luyện 2 câu</button></div>`).join("");
+  $("#dsLoi").querySelectorAll("[data-luyen]").forEach(b => b.onclick = () => { datLaiDS(LUYEN.filter(q => q.loi === b.dataset.luyen), b.dataset.luyen); moMan("thu-thach"); });
+  $("#loiGoiY").innerHTML = sai ? `<div style="font-size:40px">🤖</div><h3 style="margin:4px 0 8px">Máy nhận xét</h3><div style="line-height:1.55">Lỗi cả lớp hay mắc nhất: <b style="color:#fde68a">${LOI[nhat]}</b> — ${NK.loi[nhat]}/${sai} lượt sai (${Math.round(NK.loi[nhat] * 100 / sai)}%).<br><br><b>Cô thử:</b> ${CACH_SUA[nhat]}<br><br>Rồi bấm <b>▶ Luyện 2 câu</b> ở dòng này.</div>`
+    : `<div style="font-size:40px">🤖</div><h3 style="margin:4px 0 8px">Máy nhận xét</h3><div style="line-height:1.55;color:var(--mo)">Chưa có số liệu. Làm vài câu ở màn <b>🎯 Thử thách</b> (đếm thẻ cả lớp), máy sẽ gom lỗi về đây.</div>`; }
+$("#btXuatNK").onclick = () => { const dong = ["loai_loi,so_luot"].concat(KHOA_LOI.map(k => `"${LOI[k]}",${NK.loi[k]}`), [`"Tổng lượt trả lời",${NK.luot}`, `"Lượt chọn đúng",${NK.dung}`, `"Số câu đã làm",${NK.cau}`, `"Số câu có dùng gợi ý",${NK.goiY}`]);
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob(["﻿" + dong.join("\r\n")], { type: "text/csv" })); a.download = "nhat-ky-loi-ca-lop.csv"; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000); };
+$("#btXoaNK").onclick = function () { if (this.dataset.chac) { NK = { loi: {}, luot: 0, dung: 0, cau: 0, goiY: 0, da: {} }; KHOA_LOI.forEach(k => { NK.loi[k] = 0; }); luuNK(); PB_DAT = {}; luu("cb_pb", PB_DAT); veLoiLop(); bao("Đã bắt đầu buổi mới (xoá nhật ký lỗi và 3 chìa khoá)"); delete this.dataset.chac; this.textContent = "🗑️ Buổi mới"; }
+  else { this.dataset.chac = 1; this.textContent = "⚠️ Bấm lần nữa"; setTimeout(() => { delete this.dataset.chac; this.textContent = "🗑️ Buổi mới"; }, 3000); } };
+
+/* ---------- DÒNG THỜI GIAN ---------- */
+const THU_TU_TRON = [2, 0, 1];
+function veDongThoiGian(xong) {
+  if (xong) S.xep = [0, 1, 2];
+  const dung = S.xep.length === 3 && S.xep.every((v, i) => v === i);
+  $("#oTruc").innerHTML = [0, 1, 2].map(i => { const e = SU_KIEN[S.xep[i]];
+    return `<div class="o ${S.xep.length === 3 ? (S.xep[i] === i ? "dung" : "sai") : ""}" data-o="${i}"><div class="so">${i + 1}</div>
+      ${e ? `<button class="su-kien" data-go="${i}" style="--m1:${e.m1};--m2:${e.m2}">${HINH[e.hinh]}<div class="nam">${S.xep.length === 3 ? e.nam : "?"}</div>${e.t}</button>` : `<div style="color:var(--mo);margin-top:40px">Sự kiện thứ ${i + 1}</div>`}</div>`; }).join("");
+  $("#khoThe").innerHTML = THU_TU_TRON.map(j => { const e = SU_KIEN[j];
+    return `<button class="su-kien ${S.xep.includes(j) ? "da-dat" : ""}" data-j="${j}" style="--m1:${e.m1};--m2:${e.m2}">${HINH[e.hinh]}<div style="margin-top:4px">${e.t}</div></button>`; }).join("");
+  $("#khoThe").querySelectorAll("[data-j]").forEach(b => b.onclick = () => { if (S.xep.length >= 3) return; S.xep.push(+b.dataset.j); tieng("chon"); veDongThoiGian();
+    if (S.xep.length === 3) { const ok = S.xep.every((v, i) => v === i); tieng(ok ? "dung" : "sai"); if (ok) phaoGiay(); bao(ok ? "🎉 Đúng thứ tự thời gian!" : "Chưa đúng — xem năm ở mỗi thẻ rồi xếp lại nhé"); } });
+  $("#oTruc").querySelectorAll("[data-go]").forEach(b => b.onclick = () => { S.xep.splice(+b.dataset.go); veDongThoiGian(); });
+}
+$("#btLamLai").onclick = () => { S.xep = []; veDongThoiGian(); };
+
+/* ---------- CÔ SỬA BẢN ĐỒ ---------- */
+function veSoan() {
+  ganBanDo("soan", $("#khungBd4"), id => { if (id) { S.soan = id; veSoan(); } });
+  const g = GHIM.find(x => x.id === S.soan) || GHIM[0]; if (!g) { $("#formSoan").innerHTML = "Chưa có ghim — bấm Thêm ghim."; return; } S.soan = g.id;
+  $("#formSoan").innerHTML = `<h3 style="margin:0">✏️ Sửa ghim</h3>
+    <label>Tên địa danh<input id="fTen" maxlength="40" value="${g.ten.replace(/"/g, "&quot;")}"></label>
+    <label>Loại (kí hiệu)<select id="fLoai">${Object.entries(LOAI).map(([k, L]) => `<option value="${k}" ${k === g.loai ? "selected" : ""}>${L.ky} ${L.ten}</option>`).join("")}</select></label>
+    <label>Hình minh hoạ<select id="fHinh">${Object.keys(HINH).map(k => `<option ${k === g.hinh ? "selected" : ""}>${k}</option>`).join("")}</select></label>
+    <label>Giới thiệu ngắn (ghi theo tài liệu địa phương)<textarea id="fMo" maxlength="220">${g.mo}</textarea></label>
+    <div class="dieu" style="margin:0"><button class="nut" id="btLuuGhim">💾 Lưu ghim</button><button class="nut phu" id="btXoaGhim">🗑️ Xoá ghim</button></div>`;
+  $("#btLuuGhim").onclick = () => { g.ten = $("#fTen").value.trim() || g.ten; g.loai = $("#fLoai").value; g.hinh = $("#fHinh").value; g.mo = $("#fMo").value.trim(); luu("cb_ghim", GHIM); veSoan(); bao("Đã lưu ghim"); };
+  $("#btXoaGhim").onclick = function () { if (this.dataset.chac) { GHIM = GHIM.filter(x => x.id !== g.id); S.soan = null; luu("cb_ghim", GHIM); veSoan(); bao("Đã xoá ghim"); }
+    else { this.dataset.chac = 1; this.textContent = "⚠️ Bấm lần nữa"; setTimeout(() => { delete this.dataset.chac; this.textContent = "🗑️ Xoá ghim"; }, 3000); } };
+}
+$("#btThem").onclick = () => { const id = "g" + Date.now(); GHIM.push({ id, loai: "khac", x: 470, y: 400, ten: "Địa danh mới", mo: "[Cô ghi theo tài liệu địa phương]", hinh: "khac" }); S.soan = id; luu("cb_ghim", GHIM); veSoan(); };
+$("#btXuat").onclick = () => { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(GHIM, null, 1)], { type: "application/json" })); a.download = "ban-do-cao-bang-ghim.json"; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000); };
+$("#btNhap").onclick = () => $("#fileNhap").click();
+$("#fileNhap").onchange = e => { const f = e.target.files[0]; if (!f) return; f.text().then(t => { try { const o = JSON.parse(t); if (!Array.isArray(o)) throw 0; GHIM = o; luu("cb_ghim", GHIM); veSoan(); bao("Đã nhập ghim"); } catch (er) { bao("File không đúng"); } }); };
+$("#btGoc").onclick = function () { if (this.dataset.chac) { GHIM = JSON.parse(JSON.stringify(GHIM_GOC)); luu("cb_ghim", GHIM); S.soan = null; veSoan(); bao("Đã về mặc định"); delete this.dataset.chac; this.textContent = "↺ Về mặc định"; }
+  else { this.dataset.chac = 1; this.textContent = "⚠️ Bấm lần nữa"; setTimeout(() => { delete this.dataset.chac; this.textContent = "↺ Về mặc định"; }, 3000); } };
+
+/* ---------- chuyển màn + chế độ chụp: #kham-pha&ghim=ban-gioc · #doc-ban-do&buoc=2 · #thu-thach&cau=3&chon=0&mo=1 · #dong-thoi-gian&xong=1 ---------- */
+function moMan(ten) { S.man = ten; if (ten !== "thu-thach" && MAY.chay) tatMay();   // rời màn thử thách thì tắt camera
+  document.querySelectorAll(".man").forEach(m => m.classList.toggle("on", m.id === "m-" + ten));
+  document.querySelectorAll("nav button").forEach(b => b.classList.toggle("on", b.dataset.man === ten));
+  ({ "kham-pha": veKhamPha, "doc-ban-do": veDocBanDo, "pac-bo": vePacBoMan, "thu-thach": veThuThach, "dong-thoi-gian": () => veDongThoiGian(), "loi-lop": veLoiLop, "soan": veSoan })[ten](); }
+document.querySelectorAll("nav button").forEach(b => b.onclick = () => moMan(b.dataset.man));
+addEventListener("keydown", e => { if (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName) || S.man !== "thu-thach") return;
+  const k = { "1": 0, "2": 1, "3": 2, "4": 3, a: 0, b: 1, c: 2, d: 3 }[e.key.toLowerCase()];
+  if (k !== undefined && !CAU[S.cau].cham && !S.mo) { S.chon = k; veThuThach(); }
+  else if (e.key === " " || e.key === "Enter") { e.preventDefault(); moDapAn(); } else if (e.key === "ArrowRight") $("#btTiep").click(); else if (e.key === "ArrowLeft") $("#btTruoc").click(); });
+function moTheoDiaChi() {
+  const p = location.hash.slice(1).split("&"), ten = p.shift() || "kham-pha", q = {}; p.forEach(s => { const [a, b] = s.split("="); q[a] = decodeURIComponent(b || ""); });
+  if (location.hash) document.body.classList.add("chup");
+  if (q.ghim) S.chonGhim = q.ghim; if (q.buoc) S.buoc = +q.buoc;
+  if (q.khoa !== undefined) { PB_CHUP = true; PB_DAT = {}; q.khoa.split(",").forEach(k => PB_CAU.filter(x => x.chia === +k).forEach(x => { PB_DAT[x.id] = 1; })); }   // chỉ để chụp ảnh, không lưu
+  if (q.pbghim) S.chonPB = q.pbghim;
+  if (q.luyen && KHOA_LOI.includes(q.luyen)) datLaiDS(LUYEN.filter(x => x.loi === q.luyen), q.luyen);
+  else if (q.pb && [1, 2, 3].includes(+q.pb)) datLaiDS(PB_CAU.filter(x => x.chia === +q.pb), "pb" + q.pb); else if (CAU !== CAU_THI) datLaiDS(CAU_THI, "thi");
+  if (q.cau) { S.cau = Math.max(0, Math.min(CAU.length - 1, +q.cau - 1)); S.chon = q.chon !== undefined ? (CAU[S.cau].cham ? q.chon : +q.chon) : null; S.mo = q.mo === "1"; if (S.mo && S.chon !== null) S.ketQua[S.cau] = CAU[S.cau].cham ? S.chon === CAU[S.cau].cham : S.chon === CAU[S.cau].d; }
+  if (q.gy) S.gy[S.cau] = Math.max(0, Math.min(3, +q.gy));
+  if (q.phieu) { const p = q.phieu.split(",").map(n => Math.max(0, +n || 0)); while (p.length < 4) p.push(0); S.phieu[S.cau] = p.slice(0, 4); S.demo = true; if (q.may === "1") $("#may").classList.add("on"); }   // chỉ để chụp ảnh thử
+  if (q.demo === "1") { NK = { demo: true, loi: { "doc-ten": 3, "dong-tay": 9, "bac-nam": 3, "chu-giai": 6, "ranh": 4, "tiep-giap": 2, "huong-cheo": 5 }, luot: 112, dung: 83, cau: 8, goiY: 3, da: {} }; }   // dữ liệu thử, KHÔNG lưu
+  if (q.xong === "1") S.xep = [0, 1, 2];
+  moMan(["kham-pha", "doc-ban-do", "pac-bo", "thu-thach", "dong-thoi-gian", "loi-lop", "soan"].includes(ten) ? ten : "kham-pha");
+  if (q.may === "1" && S.man === "thu-thach") veMay();
+}
+moTheoDiaChi(); addEventListener("hashchange", moTheoDiaChi);
+</script>
+</body>
+</html>
